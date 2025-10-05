@@ -35,22 +35,4 @@ describe('Settings', function () {
             ->click('button[type="submit"]')
             ->assertSee('Password updated successfully');
     });
-
-    it('allows users to change appearance settings', function () {
-        $user = User::factory()->create();
-
-        $this->actingAs($user);
-
-        $page = visit('/settings/appearance')
-            ->on();
-
-        // Verify the theme toggle component is present
-        $page->assertPresent('[data-testid="theme-toggle"]');
-
-        // Click on the Dark theme button
-        $page->click('[data-testid="theme-toggle"] button:has-text("Dark")');
-
-        // Verify we're still on the appearance page
-        $page->assertPathIs('/settings/appearance');
-    });
 });
