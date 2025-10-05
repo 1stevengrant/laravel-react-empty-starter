@@ -1,98 +1,70 @@
-import { applyUrlDefaults, queryParams, type RouteDefinition, type RouteQueryOptions } from './../../../../../../wayfinder';
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../../wayfinder'
 /**
- * @see \Filament\Actions\Imports\Http\Controllers\DownloadImportFailureCsv::__invoke
- * @see vendor/filament/actions/src/Imports/Http/Controllers/DownloadImportFailureCsv.php:17
- * @route '/filament/imports/{import}/failed-rows/download'
- */
-const DownloadImportFailureCsv = (
-    args:
-        | { import: string | number | { id: string | number } }
-        | [importParam: string | number | { id: string | number }]
-        | string
-        | number
-        | { id: string | number },
-    options?: RouteQueryOptions,
-): RouteDefinition<'get'> => ({
+* @see \Filament\Actions\Imports\Http\Controllers\DownloadImportFailureCsv::__invoke
+* @see vendor/filament/actions/src/Imports/Http/Controllers/DownloadImportFailureCsv.php:17
+* @route '/filament/imports/{import}/failed-rows/download'
+*/
+const DownloadImportFailureCsv = (args: { import: string | number | { id: string | number } } | [importParam: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: DownloadImportFailureCsv.url(args, options),
     method: 'get',
-});
+})
 
 DownloadImportFailureCsv.definition = {
-    methods: ['get', 'head'],
+    methods: ["get","head"],
     url: '/filament/imports/{import}/failed-rows/download',
-} satisfies RouteDefinition<['get', 'head']>;
+} satisfies RouteDefinition<["get","head"]>
 
 /**
- * @see \Filament\Actions\Imports\Http\Controllers\DownloadImportFailureCsv::__invoke
- * @see vendor/filament/actions/src/Imports/Http/Controllers/DownloadImportFailureCsv.php:17
- * @route '/filament/imports/{import}/failed-rows/download'
- */
-DownloadImportFailureCsv.url = (
-    args:
-        | { import: string | number | { id: string | number } }
-        | [importParam: string | number | { id: string | number }]
-        | string
-        | number
-        | { id: string | number },
-    options?: RouteQueryOptions,
-) => {
+* @see \Filament\Actions\Imports\Http\Controllers\DownloadImportFailureCsv::__invoke
+* @see vendor/filament/actions/src/Imports/Http/Controllers/DownloadImportFailureCsv.php:17
+* @route '/filament/imports/{import}/failed-rows/download'
+*/
+DownloadImportFailureCsv.url = (args: { import: string | number | { id: string | number } } | [importParam: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
-        args = { import: args };
+        args = { import: args }
     }
 
     if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
-        args = { import: args.id };
+        args = { import: args.id }
     }
 
     if (Array.isArray(args)) {
         args = {
             import: args[0],
-        };
+        }
     }
 
-    args = applyUrlDefaults(args);
+    args = applyUrlDefaults(args)
 
     const parsedArgs = {
-        import: typeof args.import === 'object' ? args.import.id : args.import,
-    };
+        import: typeof args.import === 'object'
+        ? args.import.id
+        : args.import,
+    }
 
-    return DownloadImportFailureCsv.definition.url.replace('{import}', parsedArgs.import.toString()).replace(/\/+$/, '') + queryParams(options);
-};
+    return DownloadImportFailureCsv.definition.url
+            .replace('{import}', parsedArgs.import.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
 
 /**
- * @see \Filament\Actions\Imports\Http\Controllers\DownloadImportFailureCsv::__invoke
- * @see vendor/filament/actions/src/Imports/Http/Controllers/DownloadImportFailureCsv.php:17
- * @route '/filament/imports/{import}/failed-rows/download'
- */
-DownloadImportFailureCsv.get = (
-    args:
-        | { import: string | number | { id: string | number } }
-        | [importParam: string | number | { id: string | number }]
-        | string
-        | number
-        | { id: string | number },
-    options?: RouteQueryOptions,
-): RouteDefinition<'get'> => ({
+* @see \Filament\Actions\Imports\Http\Controllers\DownloadImportFailureCsv::__invoke
+* @see vendor/filament/actions/src/Imports/Http/Controllers/DownloadImportFailureCsv.php:17
+* @route '/filament/imports/{import}/failed-rows/download'
+*/
+DownloadImportFailureCsv.get = (args: { import: string | number | { id: string | number } } | [importParam: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: DownloadImportFailureCsv.url(args, options),
     method: 'get',
-});
+})
 
 /**
- * @see \Filament\Actions\Imports\Http\Controllers\DownloadImportFailureCsv::__invoke
- * @see vendor/filament/actions/src/Imports/Http/Controllers/DownloadImportFailureCsv.php:17
- * @route '/filament/imports/{import}/failed-rows/download'
- */
-DownloadImportFailureCsv.head = (
-    args:
-        | { import: string | number | { id: string | number } }
-        | [importParam: string | number | { id: string | number }]
-        | string
-        | number
-        | { id: string | number },
-    options?: RouteQueryOptions,
-): RouteDefinition<'head'> => ({
+* @see \Filament\Actions\Imports\Http\Controllers\DownloadImportFailureCsv::__invoke
+* @see vendor/filament/actions/src/Imports/Http/Controllers/DownloadImportFailureCsv.php:17
+* @route '/filament/imports/{import}/failed-rows/download'
+*/
+DownloadImportFailureCsv.head = (args: { import: string | number | { id: string | number } } | [importParam: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: DownloadImportFailureCsv.url(args, options),
     method: 'head',
-});
+})
 
-export default DownloadImportFailureCsv;
+export default DownloadImportFailureCsv

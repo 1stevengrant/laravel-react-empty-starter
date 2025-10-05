@@ -57,7 +57,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     protected function name(): \Illuminate\Database\Eloquent\Casts\Attribute
     {
         return \Illuminate\Database\Eloquent\Casts\Attribute::make(
-            get: fn () => trim($this->first_name . ' ' . $this->last_name),
+            get: fn () => mb_trim($this->first_name . ' ' . $this->last_name),
         );
     }
 

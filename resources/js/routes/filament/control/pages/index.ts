@@ -1,50 +1,50 @@
-import { queryParams, type RouteDefinition, type RouteQueryOptions } from './../../../../wayfinder';
+import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../wayfinder'
 /**
- * @see \Filament\Pages\Dashboard::__invoke
- * @see vendor/filament/filament/src/Pages/Dashboard.php:7
- * @route '/control'
- */
+* @see \Filament\Pages\Dashboard::__invoke
+* @see vendor/filament/filament/src/Pages/Dashboard.php:7
+* @route '/control'
+*/
 export const dashboard = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: dashboard.url(options),
     method: 'get',
-});
+})
 
 dashboard.definition = {
-    methods: ['get', 'head'],
+    methods: ["get","head"],
     url: '/control',
-} satisfies RouteDefinition<['get', 'head']>;
+} satisfies RouteDefinition<["get","head"]>
 
 /**
- * @see \Filament\Pages\Dashboard::__invoke
- * @see vendor/filament/filament/src/Pages/Dashboard.php:7
- * @route '/control'
- */
+* @see \Filament\Pages\Dashboard::__invoke
+* @see vendor/filament/filament/src/Pages/Dashboard.php:7
+* @route '/control'
+*/
 dashboard.url = (options?: RouteQueryOptions) => {
-    return dashboard.definition.url + queryParams(options);
-};
+    return dashboard.definition.url + queryParams(options)
+}
 
 /**
- * @see \Filament\Pages\Dashboard::__invoke
- * @see vendor/filament/filament/src/Pages/Dashboard.php:7
- * @route '/control'
- */
+* @see \Filament\Pages\Dashboard::__invoke
+* @see vendor/filament/filament/src/Pages/Dashboard.php:7
+* @route '/control'
+*/
 dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: dashboard.url(options),
     method: 'get',
-});
+})
 
 /**
- * @see \Filament\Pages\Dashboard::__invoke
- * @see vendor/filament/filament/src/Pages/Dashboard.php:7
- * @route '/control'
- */
+* @see \Filament\Pages\Dashboard::__invoke
+* @see vendor/filament/filament/src/Pages/Dashboard.php:7
+* @route '/control'
+*/
 dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: dashboard.url(options),
     method: 'head',
-});
+})
 
 const pages = {
     dashboard: Object.assign(dashboard, dashboard),
-};
+}
 
-export default pages;
+export default pages

@@ -21,7 +21,6 @@ So be it, until the product is shipped and there are no bugs, but profit!
 An opinionated Laravel + React + Inertia.js starter kit that won't make you cry.
 
 ### Battle-Tested Arsenal
-- **ShadCN Components** - All of them, with a [modern-minimal theme](https://tweakcn.com/editor/theme?theme=modern-minimal) that's clean and sophisticated
 - **Laravel Horizon** - Because watching queues is oddly therapeutic
 - **Laravel Pulse** - Performance monitoring for when things inevitably break
 - **Laravel Boost** - AI-powered MCP server with database schema access, Artisan commands, error logs, Tinker execution, and semantic documentation search

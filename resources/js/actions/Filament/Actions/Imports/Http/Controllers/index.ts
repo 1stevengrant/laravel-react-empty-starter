@@ -1,7 +1,7 @@
-import DownloadImportFailureCsv from './DownloadImportFailureCsv';
+import DownloadImportFailureCsv from './DownloadImportFailureCsv'
 
 const Controllers = {
     DownloadImportFailureCsv: Object.assign(DownloadImportFailureCsv, DownloadImportFailureCsv),
-};
+}
 
-export default Controllers;
+export default Controllers

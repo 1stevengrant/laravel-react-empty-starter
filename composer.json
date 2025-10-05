@@ -1,12 +1,12 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "ghijk/laravel-react-starter-kit",
+    "name": "ghijk/laravel-react-empty-starter",
     "type": "project",
     "description": "An opinionated Laravel starter kit.",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "filament/filament": "^3.3",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
