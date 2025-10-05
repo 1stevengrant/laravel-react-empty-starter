@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "php",
+            "args": [
+                "/Users/stevengrant/Sites/laravel-react-starter/artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}

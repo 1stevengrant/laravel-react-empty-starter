@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(composer require:*)",
+      "Bash(npm install:*)",
+      "Bash(php artisan:*)",
+      "Bash(npm run cypress:open:*)",
+      "Bash(npx cypress:*)",
+      "Bash(npm run cypress:run:*)",
+      "Bash(npm run types:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run build:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(composer test)",
+      "Bash(npm run test:e2e:*)",
+      "Bash(git push:*)",
+      "Bash(git log:*)",
+      "Bash(composer remove:*)",
+      "Bash(npm uninstall:*)",
+      "WebFetch(domain:pestphp.com)",
+      "Bash(npx playwright:*)"
+    ],
+    "deny": []
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "laravel-boost"
+  ]
+}
