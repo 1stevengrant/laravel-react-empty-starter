@@ -1,7 +1,7 @@
-import LogoutController from './LogoutController'
+import LogoutController from './LogoutController';
 
 const Auth = {
     LogoutController: Object.assign(LogoutController, LogoutController),
-}
+};
 
-export default Auth
+export default Auth;

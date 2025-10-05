@@ -1,7 +1,7 @@
-import Login from './Login'
+import Login from './Login';
 
 const Auth = {
     Login: Object.assign(Login, Login),
-}
+};
 
-export default Auth
+export default Auth;

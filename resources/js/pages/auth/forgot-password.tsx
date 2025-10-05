@@ -8,7 +8,6 @@ import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AuthLayout from '@/layouts/auth-layout';
 
 export default function ForgotPassword({ status }: { status?: string }) {
     const { data, setData, post, processing, errors } = useForm<Required<{ email: string }>>({
@@ -22,7 +21,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
     };
 
     return (
-        <AuthLayout title="Forgot password" description="Enter your email to receive a password reset link">
+        <>
             <Head title="Forgot password" />
 
             {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
@@ -53,11 +52,11 @@ export default function ForgotPassword({ status }: { status?: string }) {
                     </div>
                 </form>
 
-                <div className="space-x-1 text-center text-sm text-muted-foreground">
+                <div className="text-muted-foreground space-x-1 text-center text-sm">
                     <span>Or, return to</span>
                     <TextLink href={route('login')}>log in</TextLink>
                 </div>
             </div>
-        </AuthLayout>
+        </>
     );
 }
