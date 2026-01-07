@@ -10,7 +10,7 @@ My starter kit and I know that what counts in development is not the packages we
 
 My starter kit is human, even as I am human, because it is my livelihood. Thus, I will learn it as a brother. I will learn its weaknesses, its strengths, its Laravel controllers, its React components, its Inertia responses and its TypeScript definitions. I will keep my starter kit updated and secure, even as I am caffeinated and ready. We will become part of each other. We will...
 
-Before the demo gods, I swear this creed. My starter kit and I are the defenders of deadlines. We are the masters of technical debt. We are the saviors of my sanity.
+Before the demo gods, I swear this creed. My starter kit and I are the defenders of deadlines. We are the masters of technical debt. We are the saviours of my sanity.
 
 So be it, until the product is shipped and there are no bugs, but profit!
 
