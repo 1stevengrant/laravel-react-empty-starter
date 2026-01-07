@@ -5,8 +5,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-describe('Authentication', function () {
-    it('allows user registration', function () {
+describe('Authentication', function (): void {
+    it('allows user registration', function (): void {
         $page = visit('/register')
             ->on();
 
@@ -20,7 +20,7 @@ describe('Authentication', function () {
             ->assertSee('Resend verification email');
     });
 
-    it('allows user login', function () {
+    it('allows user login', function (): void {
         $user = User::factory()->create([
             'email' => 'test@example.com',
             'password' => bcrypt('password123'),
@@ -37,7 +37,7 @@ describe('Authentication', function () {
             ->assertSee('Dashboard');
     });
 
-    it('shows validation errors for invalid login', function () {
+    it('shows validation errors for invalid login', function (): void {
         $page = visit('/login')
             ->on();
 
@@ -47,7 +47,7 @@ describe('Authentication', function () {
             ->assertSee('These credentials do not match our records');
     });
 
-    it('allows user logout', function () {
+    it('allows user logout', function (): void {
         $user = User::factory()->create();
 
         $this->actingAs($user);

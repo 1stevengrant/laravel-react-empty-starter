@@ -5,8 +5,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-describe('Dashboard', function () {
-    it('shows the dashboard page for authenticated users', function () {
+describe('Dashboard', function (): void {
+    it('shows the dashboard page for authenticated users', function (): void {
         $user = User::factory()->create();
 
         $this->actingAs($user);
@@ -17,14 +17,14 @@ describe('Dashboard', function () {
         $page->assertSee('Dashboard');
     });
 
-    it('redirects unauthenticated users to login', function () {
+    it('redirects unauthenticated users to login', function (): void {
         $page = visit('/dashboard')
             ->on();
 
         $page->assertPathIs('/login');
     });
 
-    it('allows navigation to settings from sidebar', function () {
+    it('allows navigation to settings from sidebar', function (): void {
         $user = User::factory()->create();
 
         $this->actingAs($user);

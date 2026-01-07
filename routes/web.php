@@ -6,7 +6,7 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', HomeController::class)->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function (): void {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
 });
 

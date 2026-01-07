@@ -4,19 +4,19 @@ use App\Models\User;
 
 uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
-test('guests are redirected to filament login page when accessing control panel', function () {
+test('guests are redirected to filament login page when accessing control panel', function (): void {
     $response = $this->get('/control');
 
     $response->assertRedirect('/control/login');
 });
 
-test('filament login page can be rendered', function () {
+test('filament login page can be rendered', function (): void {
     $response = $this->get('/control/login');
 
     $response->assertStatus(200);
 });
 
-test('non-admin users are denied access to the filament control panel', function () {
+test('non-admin users are denied access to the filament control panel', function (): void {
     $user = User::factory()->create(['is_admin' => false]);
 
     $response = $this->actingAs($user)->get('/control');
@@ -24,7 +24,7 @@ test('non-admin users are denied access to the filament control panel', function
     $response->assertStatus(403); // Forbidden
 });
 
-test('admin users can access the filament control panel', function () {
+test('admin users can access the filament control panel', function (): void {
     $user = User::factory()->create(['is_admin' => true]);
 
     $response = $this->actingAs($user)->get('/control');
@@ -32,7 +32,7 @@ test('admin users can access the filament control panel', function () {
     $response->assertStatus(200);
 });
 
-test('admin users can access the filament dashboard', function () {
+test('admin users can access the filament dashboard', function (): void {
     $user = User::factory()->create(['is_admin' => true]);
 
     $response = $this->actingAs($user)->get('/control');
@@ -41,7 +41,7 @@ test('admin users can access the filament dashboard', function () {
     $response->assertSee('Dashboard'); // Should contain dashboard content
 });
 
-test('admin users can logout from filament control panel', function () {
+test('admin users can logout from filament control panel', function (): void {
     $user = User::factory()->create(['is_admin' => true]);
 
     // First login and access the control panel
@@ -54,7 +54,7 @@ test('admin users can logout from filament control panel', function () {
     $response->assertRedirect('/control/login');
 });
 
-test('filament control panel requires admin privileges', function () {
+test('filament control panel requires admin privileges', function (): void {
     // Test that the control panel route has auth middleware by checking redirect
     $this->get('/control')
         ->assertRedirect('/control/login');

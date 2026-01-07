@@ -4,8 +4,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-describe('Home Page', function () {
-    it('shows the welcome page', function () {
+describe('Home Page', function (): void {
+    it('shows the welcome page', function (): void {
         $page = visit('/')
             ->on();
 
@@ -13,7 +13,7 @@ describe('Home Page', function () {
             ->assertSee('Register');
     });
 
-    it('navigates to login page', function () {
+    it('navigates to login page', function (): void {
         $page = visit('/')
             ->on();
 
@@ -21,7 +21,7 @@ describe('Home Page', function () {
             ->assertPathIs('/login');
     });
 
-    it('navigates to register page', function () {
+    it('navigates to register page', function (): void {
         $page = visit('/')
             ->on();
 

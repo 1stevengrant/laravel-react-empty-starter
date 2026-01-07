@@ -5,8 +5,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-describe('Settings', function () {
-    it('allows users to update their profile', function () {
+describe('Settings', function (): void {
+    it('allows users to update their profile', function (): void {
         $user = User::factory()->create();
 
         $this->actingAs($user);
@@ -21,7 +21,7 @@ describe('Settings', function () {
             ->assertSee('Profile updated successfully');
     });
 
-    it('allows users to change their password', function () {
+    it('allows users to change their password', function (): void {
         $user = User::factory()->create();
 
         $this->actingAs($user);
