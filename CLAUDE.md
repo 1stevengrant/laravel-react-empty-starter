@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a Laravel 12 + React 19 starter kit using:
 - **Backend**: Laravel 12 with PHP 8.2+, SQLite, Laravel Horizon, Laravel Pulse, Sentry
-- **Frontend**: React 19 with TypeScript, Inertia.js, ShadCN/UI components, Tailwind CSS 4
+- **Frontend**: React 19 with TypeScript, Inertia.js, Tailwind CSS 4
 - **Integration**: Inertia.js for seamless Laravel-React communication without API layer
 - **Type Safety**: Spatie Laravel TypeScript Transformer automatically converts PHP DTOs to TypeScript
 
@@ -47,51 +47,62 @@ npm run build:ssr           # Build with server-side rendering
 - Laravel routes available in JavaScript via Ziggy
 
 ### Laravel Patterns
-- Uses DTOs (Data Transfer Objects) for type-safe data handling
-- Controllers return Inertia responses with data prepared by DTOs
-- Should use route model binding for clean URL handling
+
+#### Controllers
+- Controllers MUST only use standard REST verb method names: `index`, `show`, `create`, `store`, `edit`, `update`, `destroy`
+- Methods that don't fit a REST verb MUST be extracted to a new **invokable controller** (single `__invoke` method)
+- **Invokable controller naming**: Verb + Noun + Controller (e.g., `ArchivePostController`, `ExportUsersController`, `SendInvoiceController`)
 - No business logic in controllers; keep them thin and focused
-- Use Spatie Laravel Data for validation and transformation of incoming data
-- Use a custom query builder for complex queries, keeping them reusable and testable
+- Controllers return Inertia responses with data prepared by Laravel Data classes
+- Should use route model binding for clean URL handling
 
-Split large controllers into smaller ones based on responsibility.
-Avoid bloated controllers by following the standard RESTful action pattern:
-•	index – list resources
-•	show – display a single resource
-•	create – show the form to create a resource
-•	store – handle creation logic
-•	edit – show the form to edit a resource
-•	update – handle update logic
-•	destroy – delete a resource
+#### Actions Pattern
+- The **Action pattern** is preferred for encapsulating business logic
+- Actions live in `App\Actions\*` and contain a single `handle()` or `__invoke()` method
+- Use actions for complex operations, especially those reused across controllers, jobs, or commands
+- Actions are easily testable in isolation
+- **Actions are synchronous** - for queued/async operations, use Jobs under `App\Jobs\*`
 
-🛑 If a controller contains logic outside these seven, consider extracting it into:
-- A new controller
-- A job class under `App\Jobs\*`
-- An action class under `App\Actions\*`
+#### Data Classes (Spatie Laravel Data)
+- **All TypeScript interfaces and types** should originate from Laravel Data classes in `app/Data/`
+- Data classes handle **both validation and transformation** of incoming request data (not Form Requests)
+- **All data transformation MUST happen in Laravel Data classes, NEVER in React components**
+- React components should receive ready-to-render data; they should not reshape or transform API responses
+- Use `from()` methods for creating Data objects from various sources
+- Use computed properties and accessors for derived data
 
-👉 Use this pattern as a forcing function to discover better structure and domain boundaries.
+#### React Component Responsibilities
+- **DO**: Render UI, manage local UI state, call Inertia methods for navigation/forms
+- **DO**: Implement optimistic UI updates and local state changes before Inertia calls complete
+- **DO NOT**: Transform, reshape, or compute derived data from props - this belongs in Laravel Data classes
+
+#### Extraction Guidelines
+🛑 If a controller contains logic outside the seven REST verbs, extract it to:
+- A new **invokable controller** for HTTP-related actions
+- An **action class** under `App\Actions\*` for reusable business logic
+- A **job class** under `App\Jobs\*` for queued/async operations
+
+👉 Use these patterns as a forcing function to discover better structure and domain boundaries.
+
+#### Query Builders
+- Use custom query builders for complex queries, keeping them reusable and testable
 
 ### Directory Structure
 ```
 /app
-├── Data/                   # DTOs (auto-converted to TypeScript)
-├── Http/Controllers/       # Inertia controllers
+├── Actions/                # Business logic actions (single-purpose classes)
+├── Data/                   # Laravel Data classes (auto-converted to TypeScript)
+├── Http/Controllers/       # Inertia controllers (REST verbs + invokables)
 └── Models/                 # Eloquent models
 
 /resources/js
-├── components/ui/          # ShadCN/UI component library (40+ components)
+├── components/ui/          # component library
 ├── layouts/               # Page layouts (app, auth, settings)
 ├── pages/                 # Inertia.js pages
 ├── hooks/                 # Custom React hooks
 ├── lib/                   # Utilities
 └── types/                 # TypeScript definitions
 ```
-
-### UI Component System
-- Complete ShadCN/UI component library with custom "modern-minimal" theme
-- Built on Radix UI primitives for accessibility
-- Dark/light mode support with system preference detection
-- Form handling with React Hook Form + Zod validation
 
 ### Data Flow
 1. Laravel controllers prepare data using DTOs
@@ -516,6 +527,15 @@ document.addEventListener('livewire:init', function () {
 
 - You must run `vendor/bin/pint --dirty` before finalizing changes to ensure your code matches the project's expected style.
 - Do not run `vendor/bin/pint --test`, simply run `vendor/bin/pint` to fix any formatting issues.
+
+
+=== rector/core rules ===
+
+## Rector PHP
+
+- Run `vendor/bin/rector` before commits to apply automated refactoring and code quality improvements.
+- Rector handles structural code changes (upgrades, refactoring); Pint handles formatting.
+- **Pre-commit order**: Rector first, then Pint (Rector may introduce code that needs formatting).
 
 
 === pest/core rules ===
