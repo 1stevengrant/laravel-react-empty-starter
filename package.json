@@ -25,7 +25,7 @@
         "vite-plugin-run": "^0.6.1"
     },
     "dependencies": {
-        "@headlessui/react": "^2.2.0",
+        "@headlessui/react": "^2.2.9",
         "@hookform/resolvers": "^5.1.1",
         "@inertiajs/react": "^2.2.5",
         "@tailwindcss/vite": "^4.0.6",
