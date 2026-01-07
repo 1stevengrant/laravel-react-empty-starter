@@ -19,7 +19,9 @@
       "Bash(composer remove:*)",
       "Bash(npm uninstall:*)",
       "WebFetch(domain:pestphp.com)",
-      "Bash(npx playwright:*)"
+      "Bash(npx playwright:*)",
+      "Bash(vendor/bin/pint:*)",
+      "mcp__laravel-boost__get-absolute-url"
     ],
     "deny": []
   },

@@ -84,6 +84,94 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \App\Http\Controllers\PrdStatusController::__invoke
+* @see app/Http/Controllers/PrdStatusController.php:11
+* @route '/prd-status'
+*/
+export const prdStatus = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: prdStatus.url(options),
+    method: 'get',
+})
+
+prdStatus.definition = {
+    methods: ["get","head"],
+    url: '/prd-status',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\PrdStatusController::__invoke
+* @see app/Http/Controllers/PrdStatusController.php:11
+* @route '/prd-status'
+*/
+prdStatus.url = (options?: RouteQueryOptions) => {
+    return prdStatus.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\PrdStatusController::__invoke
+* @see app/Http/Controllers/PrdStatusController.php:11
+* @route '/prd-status'
+*/
+prdStatus.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: prdStatus.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\PrdStatusController::__invoke
+* @see app/Http/Controllers/PrdStatusController.php:11
+* @route '/prd-status'
+*/
+prdStatus.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: prdStatus.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\ProgressController::__invoke
+* @see app/Http/Controllers/ProgressController.php:12
+* @route '/progress'
+*/
+export const progress = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: progress.url(options),
+    method: 'get',
+})
+
+progress.definition = {
+    methods: ["get","head"],
+    url: '/progress',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\ProgressController::__invoke
+* @see app/Http/Controllers/ProgressController.php:12
+* @route '/progress'
+*/
+progress.url = (options?: RouteQueryOptions) => {
+    return progress.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\ProgressController::__invoke
+* @see app/Http/Controllers/ProgressController.php:12
+* @route '/progress'
+*/
+progress.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: progress.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\ProgressController::__invoke
+* @see app/Http/Controllers/ProgressController.php:12
+* @route '/progress'
+*/
+progress.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: progress.url(options),
+    method: 'head',
+})
+
+/**
 * @see \App\Http\Controllers\DashboardController::__invoke
 * @see app/Http/Controllers/DashboardController.php:9
 * @route '/dashboard'
