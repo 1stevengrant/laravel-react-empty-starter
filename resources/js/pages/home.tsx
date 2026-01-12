@@ -1,6 +1,10 @@
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 
+import { create as loginCreate } from '@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController';
+import { create as registerCreate } from '@/actions/App/Http/Controllers/Auth/RegisteredUserController';
+import DashboardController from '@/actions/App/Http/Controllers/DashboardController';
+
 export default function Welcome() {
     const { auth } = usePage<SharedData>().props;
 
@@ -9,11 +13,11 @@ export default function Welcome() {
             <Head title="Home" />
             <nav>
                 {auth.user ? (
-                    <Link href={route('dashboard')}>Dashboard</Link>
+                    <Link href={DashboardController.url()}>Dashboard</Link>
                 ) : (
                     <>
-                        <Link href={route('login')}>Log in</Link>
-                        <Link href={route('register')}>Register</Link>
+                        <Link href={loginCreate.url()}>Log in</Link>
+                        <Link href={registerCreate.url()}>Register</Link>
                     </>
                 )}
             </nav>

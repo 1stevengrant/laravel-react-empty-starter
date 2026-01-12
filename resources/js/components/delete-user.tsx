@@ -1,6 +1,7 @@
 import { useForm } from '@inertiajs/react';
 import { FormEventHandler, useRef } from 'react';
 
+import { destroy as destroyProfile } from '@/actions/App/Http/Controllers/Settings/ProfileController';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,7 +18,7 @@ export default function DeleteUser() {
     const deleteUser: FormEventHandler = (e) => {
         e.preventDefault();
 
-        destroy(route('profile.destroy'), {
+        destroy(destroyProfile.url(), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
             onError: () => passwordInput.current?.focus(),

@@ -3,6 +3,8 @@ import { Transition } from '@headlessui/react';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
+import { store as verificationStore } from '@/actions/App/Http/Controllers/Auth/EmailVerificationNotificationController';
+import { update } from '@/actions/App/Http/Controllers/Settings/ProfileController';
 import DeleteUser from '@/components/delete-user';
 import HeadingSmall from '@/components/heading-small';
 import InputError from '@/components/input-error';
@@ -28,7 +30,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'), {
+        patch(update.url(), {
             preserveScroll: true,
         });
     };
@@ -99,7 +101,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                             <p className="text-muted-foreground -mt-4 text-sm">
                                 Your email address is unverified.{' '}
                                 <Link
-                                    href={route('verification.send')}
+                                    href={verificationStore.url()}
                                     method="post"
                                     as="button"
                                     className="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"

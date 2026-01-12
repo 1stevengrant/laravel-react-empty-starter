@@ -4,6 +4,7 @@ import { Transition } from '@headlessui/react';
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler, useRef } from 'react';
 
+import { update } from '@/actions/App/Http/Controllers/Settings/PasswordController';
 import HeadingSmall from '@/components/heading-small';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,7 +24,7 @@ export default function Password() {
     const updatePassword: FormEventHandler = (e) => {
         e.preventDefault();
 
-        put(route('password.update'), {
+        put(update.url(), {
             preserveScroll: true,
             onSuccess: () => reset(),
             onError: (errors) => {

@@ -21,7 +21,9 @@
       "WebFetch(domain:pestphp.com)",
       "Bash(npx playwright:*)",
       "Bash(vendor/bin/pint:*)",
-      "mcp__laravel-boost__get-absolute-url"
+      "mcp__laravel-boost__get-absolute-url",
+      "WebFetch(domain:inertiajs.com)",
+      "Bash(npm run build:ssr:*)"
     ],
     "deny": []
   },

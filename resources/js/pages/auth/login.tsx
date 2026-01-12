@@ -2,6 +2,9 @@ import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
+import { store } from '@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController';
+import { create as forgotPasswordCreate } from '@/actions/App/Http/Controllers/Auth/PasswordResetLinkController';
+import { create as registerCreate } from '@/actions/App/Http/Controllers/Auth/RegisteredUserController';
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
@@ -29,7 +32,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('login'), {
+        post(store.url(), {
             onFinish: () => reset('password'),
         });
     };
@@ -61,7 +64,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                         <div className="flex items-center">
                             <Label htmlFor="password">Password</Label>
                             {canResetPassword && (
-                                <TextLink href={route('password.request')} className="ml-auto text-sm" tabIndex={5}>
+                                <TextLink href={forgotPasswordCreate.url()} className="ml-auto text-sm" tabIndex={5}>
                                     Forgot password?
                                 </TextLink>
                             )}
@@ -99,7 +102,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
 
                 <div className="text-muted-foreground text-center text-sm">
                     Don't have an account?{' '}
-                    <TextLink href={route('register')} tabIndex={5}>
+                    <TextLink href={registerCreate.url()} tabIndex={5}>
                         Sign up
                     </TextLink>
                 </div>

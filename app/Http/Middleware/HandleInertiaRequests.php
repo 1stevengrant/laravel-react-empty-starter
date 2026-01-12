@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use App\Data\UserData;
 use Inertia\Middleware;
-use Tighten\Ziggy\Ziggy;
 use Illuminate\Http\Request;
 
 class HandleInertiaRequests extends Middleware
@@ -44,10 +43,6 @@ class HandleInertiaRequests extends Middleware
             'name' => config('app.name'),
             'auth' => [
                 'user' => $request->user() ? UserData::from($request->user()) : null,
-            ],
-            'ziggy' => fn (): array => [
-                ...(new Ziggy)->toArray(),
-                'location' => $request->url(),
             ],
             'flash' => [
                 'success' => $request->session()->get('success'),

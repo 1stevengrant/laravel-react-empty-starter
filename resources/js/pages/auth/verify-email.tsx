@@ -3,6 +3,8 @@ import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
+import { destroy } from '@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController';
+import { store } from '@/actions/App/Http/Controllers/Auth/EmailVerificationNotificationController';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 
@@ -12,7 +14,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route('verification.send'));
+        post(store.url());
     };
 
     return (
@@ -31,7 +33,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
                     Resend verification email
                 </Button>
 
-                <TextLink href={route('logout')} method="post" className="mx-auto block text-sm">
+                <TextLink href={destroy.url()} method="post" className="mx-auto block text-sm">
                     Log out
                 </TextLink>
             </form>

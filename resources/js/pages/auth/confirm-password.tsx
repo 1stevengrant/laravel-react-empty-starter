@@ -3,6 +3,7 @@ import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
+import { store } from '@/actions/App/Http/Controllers/Auth/ConfirmablePasswordController';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -16,7 +17,7 @@ export default function ConfirmPassword() {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route('password.confirm'), {
+        post(store.url(), {
             onFinish: () => reset('password'),
         });
     };

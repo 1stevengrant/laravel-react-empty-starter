@@ -2,6 +2,8 @@ import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
+import { create as loginCreate } from '@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController';
+import { store } from '@/actions/App/Http/Controllers/Auth/RegisteredUserController';
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
@@ -27,7 +29,7 @@ export default function Register() {
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('register'), {
+        post(store.url(), {
             onFinish: () => reset('password', 'password_confirmation'),
         });
     };
@@ -132,7 +134,7 @@ export default function Register() {
 
                 <div className="text-muted-foreground text-center text-sm">
                     Already have an account?{' '}
-                    <TextLink href={route('login')} tabIndex={7}>
+                    <TextLink href={loginCreate.url()} tabIndex={7}>
                         Log in
                     </TextLink>
                 </div>
