@@ -9,7 +9,8 @@
         "vscode"
     ],
     "guidelines": [
-        "saloonphp/laravel-plugin"
+        "saloonphp/laravel-plugin",
+        "filament/filament"
     ],
     "herd_mcp": true
 }
