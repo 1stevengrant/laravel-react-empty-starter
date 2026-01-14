@@ -86,44 +86,44 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 /**
 * @see \App\Http\Controllers\PrdController::__invoke
 * @see app/Http/Controllers/PrdController.php:11
-* @route '/prd-status'
+* @route '/prd'
 */
-export const prdStatus = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: prdStatus.url(options),
+export const prd = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: prd.url(options),
     method: 'get',
 })
 
-prdStatus.definition = {
+prd.definition = {
     methods: ["get","head"],
-    url: '/prd-status',
+    url: '/prd',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
 * @see \App\Http\Controllers\PrdController::__invoke
 * @see app/Http/Controllers/PrdController.php:11
-* @route '/prd-status'
+* @route '/prd'
 */
-prdStatus.url = (options?: RouteQueryOptions) => {
-    return prdStatus.definition.url + queryParams(options)
+prd.url = (options?: RouteQueryOptions) => {
+    return prd.definition.url + queryParams(options)
 }
 
 /**
 * @see \App\Http\Controllers\PrdController::__invoke
 * @see app/Http/Controllers/PrdController.php:11
-* @route '/prd-status'
+* @route '/prd'
 */
-prdStatus.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: prdStatus.url(options),
+prd.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: prd.url(options),
     method: 'get',
 })
 
 /**
 * @see \App\Http\Controllers\PrdController::__invoke
 * @see app/Http/Controllers/PrdController.php:11
-* @route '/prd-status'
+* @route '/prd'
 */
-prdStatus.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: prdStatus.url(options),
+prd.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: prd.url(options),
     method: 'head',
 })
 
