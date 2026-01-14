@@ -84,8 +84,8 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\PrdStatusController::__invoke
-* @see app/Http/Controllers/PrdStatusController.php:11
+* @see \App\Http\Controllers\PrdController::__invoke
+* @see app/Http/Controllers/PrdController.php:11
 * @route '/prd-status'
 */
 export const prdStatus = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -99,8 +99,8 @@ prdStatus.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\PrdStatusController::__invoke
-* @see app/Http/Controllers/PrdStatusController.php:11
+* @see \App\Http\Controllers\PrdController::__invoke
+* @see app/Http/Controllers/PrdController.php:11
 * @route '/prd-status'
 */
 prdStatus.url = (options?: RouteQueryOptions) => {
@@ -108,8 +108,8 @@ prdStatus.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\PrdStatusController::__invoke
-* @see app/Http/Controllers/PrdStatusController.php:11
+* @see \App\Http\Controllers\PrdController::__invoke
+* @see app/Http/Controllers/PrdController.php:11
 * @route '/prd-status'
 */
 prdStatus.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -118,8 +118,8 @@ prdStatus.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\PrdStatusController::__invoke
-* @see app/Http/Controllers/PrdStatusController.php:11
+* @see \App\Http\Controllers\PrdController::__invoke
+* @see app/Http/Controllers/PrdController.php:11
 * @route '/prd-status'
 */
 prdStatus.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({

@@ -6,11 +6,11 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Facades\File;
 
-class PrdStatusController extends Controller
+class PrdController extends Controller
 {
     public function __invoke(): Response
     {
-        $prdPath = base_path('plans/example-prd.json');
+        $prdPath = base_path('plans/prd.json');
 
         $testCases = File::exists($prdPath)
             ? json_decode(File::get($prdPath), true)

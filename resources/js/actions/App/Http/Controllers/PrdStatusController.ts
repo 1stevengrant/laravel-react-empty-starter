@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../wayfinder'
 /**
-* @see \App\Http\Controllers\PrdStatusController::__invoke
-* @see app/Http/Controllers/PrdStatusController.php:11
+* @see \App\Http\Controllers\PrdController::__invoke
+* @see app/Http/Controllers/PrdController.php:11
 * @route '/prd-status'
 */
 const PrdStatusController = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -15,8 +15,8 @@ PrdStatusController.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\PrdStatusController::__invoke
-* @see app/Http/Controllers/PrdStatusController.php:11
+* @see \App\Http\Controllers\PrdController::__invoke
+* @see app/Http/Controllers/PrdController.php:11
 * @route '/prd-status'
 */
 PrdStatusController.url = (options?: RouteQueryOptions) => {
@@ -24,8 +24,8 @@ PrdStatusController.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\PrdStatusController::__invoke
-* @see app/Http/Controllers/PrdStatusController.php:11
+* @see \App\Http\Controllers\PrdController::__invoke
+* @see app/Http/Controllers/PrdController.php:11
 * @route '/prd-status'
 */
 PrdStatusController.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,8 +34,8 @@ PrdStatusController.get = (options?: RouteQueryOptions): RouteDefinition<'get'> 
 })
 
 /**
-* @see \App\Http\Controllers\PrdStatusController::__invoke
-* @see app/Http/Controllers/PrdStatusController.php:11
+* @see \App\Http\Controllers\PrdController::__invoke
+* @see app/Http/Controllers/PrdController.php:11
 * @route '/prd-status'
 */
 PrdStatusController.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
