@@ -1,13 +1,65 @@
-set -e
+#!/bin/bash
 
-claude --permission-mode acceptEdits "@plans/prd.json @progress.txt \
-1. Find the highest-priority feature to work on and work only on that feature. \
-This should be the one YOU decide has the highest priority - not necessarily the first in the list. \
-2. Check that types pass via npm run types, lint passes via npm run lint, and tests pass via composer test. \
-3. Update the PRD with the work that was done. \
-4. Append your progress to the progress.txt file. \
-Use this to leave a note for the next person working in the codebase. \
-5. Make a git commit of that feature. \
-ONLY WORK ON A SINGLE FEATURE. \
-If, while implementing the feature, you notice the PRD is complete, output <promise>COMPLETE</promise>. \
-"
+# Ralph Wiggum Technique - Single Iteration (Human-in-the-Loop)
+# Runs Claude Code once, then validates with composer test
+# https://ghuntley.com/ralph/
+
+# Config
+CLAUDE_CMD="${CLAUDE_CMD:-$HOME/.claude/local/claude}"
+PROMPT_FILE="plans/PROMPT.md"
+PRD_FILE="plans/prd.json"
+PROGRESS_FILE="plans/progress.txt"
+
+if [ ! -f "$PROMPT_FILE" ]; then
+    echo "Error: $PROMPT_FILE not found"
+    exit 1
+fi
+
+if [ ! -f "$PRD_FILE" ]; then
+    echo "Error: $PRD_FILE not found"
+    exit 1
+fi
+
+# Initialize progress.txt if it doesn't exist
+if [ ! -f "$PROGRESS_FILE" ]; then
+    echo "# Ralph Progress Log" > "$PROGRESS_FILE"
+    echo "Started: $(date)" >> "$PROGRESS_FILE"
+    echo "" >> "$PROGRESS_FILE"
+fi
+
+# Count untested features
+untested=$(grep -c '"passes": false' "$PRD_FILE" 2>/dev/null || echo "0")
+
+echo "Running single iteration"
+echo "PRD: $PRD_FILE ($untested features remaining)"
+echo "Progress: $PROGRESS_FILE"
+echo "---"
+
+# Log iteration start
+echo "---" >> "$PROGRESS_FILE"
+echo "## $(date)" >> "$PROGRESS_FILE"
+
+# Run Claude Code with the prompt
+echo "--- Running Claude Code ---"
+"$CLAUDE_CMD" -p "$(cat "$PROMPT_FILE")" --allowedTools "Bash,Edit,Read,Write,Glob,Grep"
+echo "--- Claude Code completed ---"
+
+echo ""
+echo "--- Running validation: composer test ---"
+
+if composer test; then
+    echo ""
+    echo "--- Tests passed ---"
+
+    untested_after=$(grep -c '"passes": false' "$PRD_FILE" 2>/dev/null || echo "0")
+    if [ "$untested_after" -eq 0 ]; then
+        echo "=== ALL FEATURES COMPLETE ==="
+    else
+        echo "$untested_after feature(s) remaining in PRD"
+        echo "Run again: ./ralph_once.sh"
+    fi
+else
+    echo ""
+    echo "--- Tests failed ---"
+    echo "Review the output, then run again: ./ralph_once.sh"
+fi

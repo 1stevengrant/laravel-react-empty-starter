@@ -11,7 +11,7 @@ class ProgressController extends Controller
 {
     public function __invoke(): Response
     {
-        $progressPath = base_path('progress.txt');
+        $progressPath = base_path('plans/progress.txt');
 
         $content = File::exists($progressPath)
             ? File::get($progressPath)

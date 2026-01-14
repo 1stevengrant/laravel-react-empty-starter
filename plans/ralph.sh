@@ -1,30 +1,136 @@
+#!/bin/bash
+
+# Ralph Wiggum Technique - Laravel Template
+# A persistent loop that runs Claude Code until all PRD features are tested
+# https://ghuntley.com/ralph/
+
 set -e
 
-if [ -z "$1" ]; then
-  echo "Usage: $0 <iterations>"
-  exit 1
+# Config
+CLAUDE_CMD="${CLAUDE_CMD:-$HOME/.claude/local/claude}"
+PROMPT_FILE="plans/PROMPT.md"
+PRD_FILE="plans/prd.json"
+PROGRESS_FILE="plans/progress.txt"
+MAX_ITERATIONS=50
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -n|--max-iterations)
+            MAX_ITERATIONS="$2"
+            shift 2
+            ;;
+        -h|--help)
+            echo "Usage: ./ralph.sh [OPTIONS]"
+            echo ""
+            echo "Options:"
+            echo "  -n, --max-iterations NUM  Maximum iterations (default: 50)"
+            echo "  -h, --help                Show this help message"
+            echo ""
+            echo "Examples:"
+            echo "  ./ralph.sh           # Run with defaults (50 iterations)"
+            echo "  ./ralph.sh -n 100    # Run up to 100 iterations"
+            exit 0
+            ;;
+        -*)
+            echo "Unknown option: $1"
+            echo "Use --help for usage information"
+            exit 1
+            ;;
+        *)
+            echo "Unknown argument: $1"
+            echo "Use --help for usage information"
+            exit 1
+            ;;
+    esac
+done
+
+iteration=0
+
+if [ ! -f "$PROMPT_FILE" ]; then
+    echo "Error: $PROMPT_FILE not found"
+    echo "Use --help for usage information"
+    exit 1
 fi
 
-for ((i=1; i<=$1; i++)); do
-  echo "Iteration $i"
-  echo "--------------------------------"
-  result=$(claude --permission-mode acceptEdits -p "@plans/prd.json @progress.txt \
-1. Find the highest-priority feature to work on and work only on that feature. \
-This should be the one YOU decide has the highest priority - not necessarily the first in the list. \
-2. Check that types pass via npm run types, lint passes via npm run lint, and tests pass via composer test. \
-3. Update the PRD with the work that was done. \
-4. Append your progress to the progress.txt file. \
-Use this to leave a note for the next person working in the codebase. \
-5. Make a git commit of that feature. \
-ONLY WORK ON A SINGLE FEATURE. \
-If, while implementing the feature, you notice the PRD is complete, output <promise>COMPLETE</promise>. \
-")
+if [ ! -f "$PRD_FILE" ]; then
+    echo "Error: $PRD_FILE not found"
+    exit 1
+fi
 
-  echo "$result"
+# Initialize progress.txt if it doesn't exist
+if [ ! -f "$PROGRESS_FILE" ]; then
+    echo "# Ralph Progress Log" > "$PROGRESS_FILE"
+    echo "Started: $(date)" >> "$PROGRESS_FILE"
+    echo "" >> "$PROGRESS_FILE"
+fi
 
-  if [[ "$result" == *"<promise>COMPLETE</promise>"* ]]; then
-    echo "PRD complete, exiting."
-    tt notify "CVM PRD complete after $i iterations"
-    exit 0
-  fi
+# Function to check if all features are tested
+all_features_tested() {
+    # Returns true if no untested features exist
+    ! grep -q '"passes": false' "$PRD_FILE" 2>/dev/null
+}
+
+echo "Starting Ralph loop with $PROMPT_FILE (max $MAX_ITERATIONS iterations)"
+echo "PRD: $PRD_FILE"
+echo "Progress: $PROGRESS_FILE"
+echo "Stop condition: composer test passes AND all PRD features tested"
+echo "---"
+
+# Check stop conditions before first iteration
+echo ""
+echo "--- Checking if already complete ---"
+if composer test 2>/dev/null; then
+    if all_features_tested; then
+        echo "" >> "$PROGRESS_FILE"
+        echo "=== ALREADY COMPLETE: All features tested before first iteration ===" >> "$PROGRESS_FILE"
+        echo ""
+        echo "=== SUCCESS: All tests already pass and all PRD features already tested ==="
+        exit 0
+    fi
+fi
+echo "--- Not yet complete, starting iterations ---"
+
+while [ $iteration -lt $MAX_ITERATIONS ]; do
+    iteration=$((iteration + 1))
+    echo ""
+    echo "=== Iteration $iteration of $MAX_ITERATIONS ==="
+    echo ""
+
+    # Log iteration start to progress file
+    echo "---" >> "$PROGRESS_FILE"
+    echo "## Iteration $iteration - $(date)" >> "$PROGRESS_FILE"
+
+    # Run Claude Code with the prompt
+    echo "--- Running Claude Code ---"
+    "$CLAUDE_CMD" -p "$(cat "$PROMPT_FILE")" --allowedTools "Bash,Edit,Read,Write,Glob,Grep"
+    echo "--- Claude Code completed ---"
+
+    echo ""
+    echo "--- Running validation: composer test ---"
+
+    # Check if tests pass
+    if composer test; then
+        echo ""
+        echo "--- Tests passed, checking PRD completion ---"
+
+        if all_features_tested; then
+            echo "" >> "$PROGRESS_FILE"
+            echo "=== COMPLETED: All features tested on iteration $iteration ===" >> "$PROGRESS_FILE"
+            echo ""
+            echo "=== SUCCESS: All tests passed and all PRD features tested on iteration $iteration ==="
+            exit 0
+        else
+            echo "--- Some PRD features still untested, continuing ---"
+        fi
+    else
+        echo ""
+        echo "--- Tests failed, continuing to next iteration ---"
+    fi
 done
+
+echo "" >> "$PROGRESS_FILE"
+echo "=== STOPPED: Reached max iterations ($MAX_ITERATIONS) ===" >> "$PROGRESS_FILE"
+echo ""
+echo "=== STOPPED: Reached max iterations ($MAX_ITERATIONS) ==="
+exit 1
