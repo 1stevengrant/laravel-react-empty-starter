@@ -48,14 +48,20 @@ describe('Authentication', function (): void {
     });
 
     it('allows user logout', function (): void {
-        $user = User::factory()->create();
+        User::factory()->create([
+            'email' => 'logout@example.com',
+            'password' => bcrypt('password123'),
+            'email_verified_at' => now(),
+        ]);
 
-        $this->actingAs($user);
-
-        $page = visit('/dashboard')
+        $page = visit('/login')
             ->on();
 
-        $page->assertSee('Dashboard');
+        $page->type('[name="email"]', 'logout@example.com')
+            ->type('[name="password"]', 'password123')
+            ->click('button[type="submit"]')
+            ->assertPathIs('/dashboard')
+            ->assertSee('Dashboard');
 
         // Logout via POST request since UI doesn't have logout button yet
         $this->post(route('logout'));
