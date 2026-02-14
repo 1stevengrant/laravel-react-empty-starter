@@ -1,65 +1,18 @@
-#!/bin/bash
+set -e
 
-# Ralph Wiggum Technique - Single Iteration (Human-in-the-Loop)
-# Runs Claude Code once, then validates with composer test
-# https://ghuntley.com/ralph/
-
-# Config
-CLAUDE_CMD="${CLAUDE_CMD:-$HOME/.claude/local/claude}"
-PROMPT_FILE="plans/PROMPT.md"
-PRD_FILE="plans/prd.json"
-PROGRESS_FILE="plans/progress.txt"
-
-if [ ! -f "$PROMPT_FILE" ]; then
-    echo "Error: $PROMPT_FILE not found"
-    exit 1
-fi
-
-if [ ! -f "$PRD_FILE" ]; then
-    echo "Error: $PRD_FILE not found"
-    exit 1
-fi
-
-# Initialize progress.txt if it doesn't exist
-if [ ! -f "$PROGRESS_FILE" ]; then
-    echo "# Ralph Progress Log" > "$PROGRESS_FILE"
-    echo "Started: $(date)" >> "$PROGRESS_FILE"
-    echo "" >> "$PROGRESS_FILE"
-fi
-
-# Count untested features
-untested=$(grep -c '"passes": false' "$PRD_FILE" 2>/dev/null || echo "0")
-
-echo "Running single iteration"
-echo "PRD: $PRD_FILE ($untested features remaining)"
-echo "Progress: $PROGRESS_FILE"
-echo "---"
-
-# Log iteration start
-echo "---" >> "$PROGRESS_FILE"
-echo "## $(date)" >> "$PROGRESS_FILE"
-
-# Run Claude Code with the prompt
-echo "--- Running Claude Code ---"
-"$CLAUDE_CMD" -p "$(cat "$PROMPT_FILE")" --allowedTools "Bash,Edit,Read,Write,Glob,Grep"
-echo "--- Claude Code completed ---"
-
-echo ""
-echo "--- Running validation: composer test ---"
-
-if composer test; then
-    echo ""
-    echo "--- Tests passed ---"
-
-    untested_after=$(grep -c '"passes": false' "$PRD_FILE" 2>/dev/null || echo "0")
-    if [ "$untested_after" -eq 0 ]; then
-        echo "=== ALL FEATURES COMPLETE ==="
-    else
-        echo "$untested_after feature(s) remaining in PRD"
-        echo "Run again: ./ralph_once.sh"
-    fi
-else
-    echo ""
-    echo "--- Tests failed ---"
-    echo "Review the output, then run again: ./ralph_once.sh"
-fi
+claude --model opus --permission-mode acceptEdits "@plans/prd.json @plans/progress.txt \
+1. Find the highest-priority feature to work on and work only on that feature. \
+This should be the one YOU decide has the highest priority - not necessarily the first in the list. \
+Read plans/progress.txt to understand what has already been done. \
+2. Explore the codebase to understand existing patterns, models, and conventions. \
+3. Implement the feature following Laravel conventions. Use php artisan make:* to generate files. \
+4. Write Pest tests for the feature. \
+5. Check that tests pass via php artisan test --compact and that Pint passes via vendor/bin/pint --dirty. \
+6. Update the PRD with the work that was done - set passes to true for completed features. \
+7. Append your progress to plans/progress.txt. \
+Use this to leave a note for the next iteration working in the codebase. \
+Include: feature worked on, files created/modified, key decisions, blockers. \
+8. Make a git commit with a RALPH: prefix. \
+ONLY WORK ON A SINGLE FEATURE. \
+If, while implementing the feature, you notice the PRD is complete, output <promise>COMPLETE</promise>. \
+"
