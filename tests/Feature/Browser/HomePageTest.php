@@ -10,7 +10,7 @@ describe('Home Page', function (): void {
             ->on();
 
         $page->assertSee('Log in')
-            ->assertSee('Register');
+            ->assertSee('Create account');
     });
 
     it('navigates to login page', function (): void {
@@ -25,7 +25,7 @@ describe('Home Page', function (): void {
         $page = visit('/')
             ->on();
 
-        $page->click('a:has-text("Register")')
+        $page->click('a:has-text("Create account")')
             ->assertPathIs('/register');
     });
 });
