@@ -6,6 +6,7 @@ import { FormEventHandler } from 'react';
 import { create as loginCreate } from '@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController';
 import { store } from '@/actions/App/Http/Controllers/Auth/PasswordResetLinkController';
 import InputError from '@/components/input-error';
+import StatusMessage from '@/components/status-message';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -26,7 +27,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
         <>
             <Head title="Forgot password" />
 
-            {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
+            <StatusMessage message={status} className="mb-4" />
 
             <div className="space-y-6">
                 <form onSubmit={submit}>

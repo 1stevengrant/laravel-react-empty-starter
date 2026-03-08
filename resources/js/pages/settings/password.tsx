@@ -1,4 +1,5 @@
 import InputError from '@/components/input-error';
+import StatusMessage from '@/components/status-message';
 import { type SharedData } from '@/types';
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler, useRef } from 'react';
@@ -109,7 +110,7 @@ export default function Password() {
                         {recentlySuccessful && <p className="text-sm text-neutral-600 animate-in fade-in">Saved</p>}
                     </div>
 
-                    {flash?.success && <div className="text-sm font-medium text-green-600">{flash.success}</div>}
+                    <StatusMessage message={flash?.success} />
                 </form>
             </div>
         </>

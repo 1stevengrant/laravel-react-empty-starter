@@ -7,6 +7,7 @@ import { update } from '@/actions/App/Http/Controllers/Settings/ProfileControlle
 import DeleteUser from '@/components/delete-user';
 import HeadingSmall from '@/components/heading-small';
 import InputError from '@/components/input-error';
+import StatusMessage from '@/components/status-message';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -109,11 +110,10 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                                 </Link>
                             </p>
 
-                            {status === 'verification-link-sent' && (
-                                <div className="mt-2 text-sm font-medium text-green-600">
-                                    A new verification link has been sent to your email address.
-                                </div>
-                            )}
+                            <StatusMessage
+                                message={status === 'verification-link-sent' ? 'A new verification link has been sent to your email address.' : null}
+                                className="mt-2"
+                            />
                         </div>
                     )}
 
@@ -125,7 +125,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                         {recentlySuccessful && <p className="text-sm text-neutral-600 animate-in fade-in">Saved</p>}
                     </div>
 
-                    {flash?.success && <div className="text-sm font-medium text-green-600">{flash.success}</div>}
+                    <StatusMessage message={flash?.success} />
                 </form>
             </div>
 

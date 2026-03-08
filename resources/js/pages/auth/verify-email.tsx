@@ -5,6 +5,7 @@ import { FormEventHandler } from 'react';
 
 import { destroy } from '@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController';
 import { store } from '@/actions/App/Http/Controllers/Auth/EmailVerificationNotificationController';
+import StatusMessage from '@/components/status-message';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 
@@ -21,11 +22,10 @@ export default function VerifyEmail({ status }: { status?: string }) {
         <>
             <Head title="Email verification" />
 
-            {status === 'verification-link-sent' && (
-                <div className="mb-4 text-center text-sm font-medium text-green-600">
-                    A new verification link has been sent to the email address you provided during registration.
-                </div>
-            )}
+            <StatusMessage
+                message={status === 'verification-link-sent' ? 'A new verification link has been sent to the email address you provided during registration.' : null}
+                className="mb-4"
+            />
 
             <form onSubmit={submit} className="space-y-6 text-center">
                 <Button disabled={processing} variant="secondary">
