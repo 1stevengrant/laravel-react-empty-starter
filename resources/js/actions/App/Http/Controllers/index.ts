@@ -1,9 +1,9 @@
-import HomeController from './HomeController'
-import PrdController from './PrdController'
-import ProgressController from './ProgressController'
-import DashboardController from './DashboardController'
-import Settings from './Settings'
-import Auth from './Auth'
+import Auth from './Auth';
+import DashboardController from './DashboardController';
+import HomeController from './HomeController';
+import PrdController from './PrdController';
+import ProgressController from './ProgressController';
+import Settings from './Settings';
 
 const Controllers = {
     HomeController: Object.assign(HomeController, HomeController),
@@ -12,6 +12,6 @@ const Controllers = {
     DashboardController: Object.assign(DashboardController, DashboardController),
     Settings: Object.assign(Settings, Settings),
     Auth: Object.assign(Auth, Auth),
-}
+};
 
-export default Controllers
+export default Controllers;
