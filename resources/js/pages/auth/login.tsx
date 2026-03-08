@@ -88,7 +88,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                             id="remember"
                             name="remember"
                             checked={data.remember}
-                            onClick={() => setData('remember', !data.remember)}
+                            onCheckedChange={(checked) => setData('remember', checked === true)}
                             tabIndex={3}
                         />
                         <Label htmlFor="remember">Remember me</Label>
@@ -100,7 +100,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                     </Button>
                 </div>
 
-                <div className="text-muted-foreground text-center text-sm">
+                <div className="text-center text-sm text-muted-foreground">
                     Don't have an account?{' '}
                     <TextLink href={registerCreate.url()} tabIndex={5}>
                         Sign up

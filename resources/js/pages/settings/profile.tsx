@@ -1,5 +1,4 @@
 import { type SharedData } from '@/types';
-import { Transition } from '@headlessui/react';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
@@ -98,7 +97,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
 
                     {mustVerifyEmail && auth.user.email_verified_at === null && (
                         <div>
-                            <p className="text-muted-foreground -mt-4 text-sm">
+                            <p className="-mt-4 text-sm text-muted-foreground">
                                 Your email address is unverified.{' '}
                                 <Link
                                     href={verificationStore.url()}
@@ -123,15 +122,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                             Save
                         </Button>
 
-                        <Transition
-                            show={recentlySuccessful}
-                            enter="transition ease-in-out"
-                            enterFrom="opacity-0"
-                            leave="transition ease-in-out"
-                            leaveTo="opacity-0"
-                        >
-                            <p className="text-sm text-neutral-600">Saved</p>
-                        </Transition>
+                        {recentlySuccessful && <p className="text-sm text-neutral-600 animate-in fade-in">Saved</p>}
                     </div>
 
                     {flash?.success && <div className="text-sm font-medium text-green-600">{flash.success}</div>}

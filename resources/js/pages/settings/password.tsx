@@ -1,6 +1,5 @@
 import InputError from '@/components/input-error';
 import { type SharedData } from '@/types';
-import { Transition } from '@headlessui/react';
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler, useRef } from 'react';
 
@@ -107,15 +106,7 @@ export default function Password() {
                             Save password
                         </Button>
 
-                        <Transition
-                            show={recentlySuccessful}
-                            enter="transition ease-in-out"
-                            enterFrom="opacity-0"
-                            leave="transition ease-in-out"
-                            leaveTo="opacity-0"
-                        >
-                            <p className="text-sm text-neutral-600">Saved</p>
-                        </Transition>
+                        {recentlySuccessful && <p className="text-sm text-neutral-600 animate-in fade-in">Saved</p>}
                     </div>
 
                     {flash?.success && <div className="text-sm font-medium text-green-600">{flash.success}</div>}
