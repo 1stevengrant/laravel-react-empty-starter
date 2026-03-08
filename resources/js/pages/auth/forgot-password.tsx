@@ -3,8 +3,8 @@ import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
-import { store } from '@/actions/App/Http/Controllers/Auth/PasswordResetLinkController';
 import { create as loginCreate } from '@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController';
+import { store } from '@/actions/App/Http/Controllers/Auth/PasswordResetLinkController';
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
@@ -54,7 +54,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                     </div>
                 </form>
 
-                <div className="text-muted-foreground space-x-1 text-center text-sm">
+                <div className="space-x-1 text-center text-sm text-muted-foreground">
                     <span>Or, return to</span>
                     <TextLink href={loginCreate.url()}>log in</TextLink>
                 </div>

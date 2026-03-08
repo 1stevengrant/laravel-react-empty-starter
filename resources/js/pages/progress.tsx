@@ -1,5 +1,5 @@
-import { Head } from '@inertiajs/react';
 import { cn } from '@/lib/utils';
+import { Head } from '@inertiajs/react';
 
 interface ProgressEntry {
     type: 'implemented' | 'fixed' | 'verified';
@@ -39,7 +39,12 @@ const typeConfig: Record<string, { label: string; bg: string; text: string; bord
         border: 'border-blue-200 dark:border-blue-800',
         icon: (
             <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
         ),
@@ -65,7 +70,7 @@ function TypeBadge({ type }: { type: string }) {
                 'inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium',
                 config.bg,
                 config.text,
-                config.border
+                config.border,
             )}
         >
             {config.icon}
@@ -86,12 +91,7 @@ function ProgressEntryCard({ entry, index }: { entry: ProgressEntry; index: numb
     const config = typeConfig[entry.type] || typeConfig.implemented;
 
     return (
-        <div
-            className={cn(
-                'overflow-hidden rounded-xl border bg-white shadow-sm transition-shadow hover:shadow-md dark:bg-zinc-900',
-                config.border
-            )}
-        >
+        <div className={cn('overflow-hidden rounded-xl border bg-white shadow-sm transition-shadow hover:shadow-md dark:bg-zinc-900', config.border)}>
             <div className="border-b border-zinc-100 bg-zinc-50 px-6 py-4 dark:border-zinc-800 dark:bg-zinc-800/50">
                 <div className="flex flex-wrap items-center gap-3">
                     <span className="flex size-8 items-center justify-center rounded-full bg-zinc-200 text-sm font-semibold text-zinc-700 dark:bg-zinc-700 dark:text-zinc-300">
@@ -130,12 +130,7 @@ function ProgressEntryCard({ entry, index }: { entry: ProgressEntry; index: numb
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
                             >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M13 7l5 5m0 0l-5 5m5-5H6"
-                                />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                             </svg>
                             <span className="text-sm text-amber-800 dark:text-amber-200">
                                 <span className="font-medium">Next:</span> {entry.nextSteps}
@@ -185,10 +180,7 @@ function SummaryCard({ date, summary }: { date: string; summary: Props['summary'
                         className="h-3 rounded-l-full bg-green-500 transition-all"
                         style={{ width: `${(summary.implemented / summary.total) * 100}%` }}
                     />
-                    <div
-                        className="h-3 bg-blue-500 transition-all"
-                        style={{ width: `${(summary.fixed / summary.total) * 100}%` }}
-                    />
+                    <div className="h-3 bg-blue-500 transition-all" style={{ width: `${(summary.fixed / summary.total) * 100}%` }} />
                     <div
                         className="h-3 rounded-r-full bg-purple-500 transition-all"
                         style={{ width: `${(summary.verified / summary.total) * 100}%` }}
@@ -218,12 +210,8 @@ export default function Progress({ date, entries, summary }: Props) {
             <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
                 <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
                     <header className="mb-8">
-                        <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
-                            Progress Log
-                        </h1>
-                        <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-                            Development progress and completed work items
-                        </p>
+                        <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Progress Log</h1>
+                        <p className="mt-2 text-zinc-600 dark:text-zinc-400">Development progress and completed work items</p>
                     </header>
 
                     <div className="mb-8">
@@ -231,9 +219,7 @@ export default function Progress({ date, entries, summary }: Props) {
                     </div>
 
                     <div className="space-y-6">
-                        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
-                            Entries ({entries.length})
-                        </h2>
+                        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">Entries ({entries.length})</h2>
                         <div className="grid gap-6">
                             {entries.map((entry, index) => (
                                 <ProgressEntryCard key={index} entry={entry} index={index} />

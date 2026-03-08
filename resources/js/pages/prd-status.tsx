@@ -1,5 +1,5 @@
-import { Head } from '@inertiajs/react';
 import { cn } from '@/lib/utils';
+import { Head } from '@inertiajs/react';
 
 interface TestCase {
     category: string;
@@ -42,7 +42,7 @@ function StatusBadge({ passes }: { passes: boolean }) {
                 'inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium',
                 passes
                     ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                    : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                    : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
             )}
         >
             {passes ? (
@@ -67,7 +67,7 @@ function CategoryBadge({ category }: { category: string }) {
                 'inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-medium capitalize',
                 colors.bg,
                 colors.text,
-                colors.border
+                colors.border,
             )}
         >
             {category.replace('-', ' ')}
@@ -80,7 +80,7 @@ function TestCaseCard({ testCase, index }: { testCase: TestCase; index: number }
         <div
             className={cn(
                 'overflow-hidden rounded-xl border bg-white shadow-sm transition-shadow hover:shadow-md dark:bg-zinc-900',
-                testCase.passes ? 'border-green-200 dark:border-green-800' : 'border-zinc-200 dark:border-zinc-800'
+                testCase.passes ? 'border-green-200 dark:border-green-800' : 'border-zinc-200 dark:border-zinc-800',
             )}
         >
             <div className="border-b border-zinc-100 bg-zinc-50 px-6 py-4 dark:border-zinc-800 dark:bg-zinc-800/50">
@@ -96,9 +96,7 @@ function TestCaseCard({ testCase, index }: { testCase: TestCase; index: number }
             </div>
 
             <div className="p-6">
-                <h3 className="mb-4 text-lg font-semibold text-zinc-900 dark:text-zinc-100">
-                    {testCase.description}
-                </h3>
+                <h3 className="mb-4 text-lg font-semibold text-zinc-900 dark:text-zinc-100">{testCase.description}</h3>
 
                 <div className="space-y-2">
                     <h4 className="text-sm font-medium text-zinc-500 dark:text-zinc-400">Test Steps</h4>
@@ -152,11 +150,7 @@ function SummaryCard({ summary }: { summary: Props['summary'] }) {
                         <div
                             className={cn(
                                 'h-full rounded-full transition-all duration-500',
-                                passRate >= 80
-                                    ? 'bg-green-500'
-                                    : passRate >= 50
-                                      ? 'bg-yellow-500'
-                                      : 'bg-red-500'
+                                passRate >= 80 ? 'bg-green-500' : passRate >= 50 ? 'bg-yellow-500' : 'bg-red-500',
                             )}
                             style={{ width: `${passRate}%` }}
                         />
@@ -175,12 +169,8 @@ export default function PrdStatus({ testCases, summary }: Props) {
             <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
                 <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
                     <header className="mb-8">
-                        <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
-                            PRD Test Status
-                        </h1>
-                        <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-                            Track the implementation progress of product requirements
-                        </p>
+                        <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">PRD Test Status</h1>
+                        <p className="mt-2 text-zinc-600 dark:text-zinc-400">Track the implementation progress of product requirements</p>
                     </header>
 
                     <div className="mb-8">
