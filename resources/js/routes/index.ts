@@ -1,6 +1,6 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../wayfinder'
 /**
-* @see vendor/laravel/pulse/src/PulseServiceProvider.php:106
+* @see vendor/laravel/pulse/src/PulseServiceProvider.php:113
 * @route '/pulse'
 */
 export const pulse = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -14,7 +14,7 @@ pulse.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see vendor/laravel/pulse/src/PulseServiceProvider.php:106
+* @see vendor/laravel/pulse/src/PulseServiceProvider.php:113
 * @route '/pulse'
 */
 pulse.url = (options?: RouteQueryOptions) => {
@@ -22,7 +22,7 @@ pulse.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see vendor/laravel/pulse/src/PulseServiceProvider.php:106
+* @see vendor/laravel/pulse/src/PulseServiceProvider.php:113
 * @route '/pulse'
 */
 pulse.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -31,7 +31,7 @@ pulse.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see vendor/laravel/pulse/src/PulseServiceProvider.php:106
+* @see vendor/laravel/pulse/src/PulseServiceProvider.php:113
 * @route '/pulse'
 */
 pulse.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
