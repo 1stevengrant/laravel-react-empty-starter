@@ -41,6 +41,7 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'name' => config('app.name'),
+            'theme' => config('app.theme', 'default'),
             'auth' => [
                 'user' => $request->user() ? UserData::from($request->user()) : null,
             ],
