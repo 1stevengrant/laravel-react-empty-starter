@@ -3,18 +3,22 @@
         "claude_code"
     ],
     "guidelines": true,
-    "herd_mcp": true,
     "mcp": true,
+    "nightwatch_mcp": false,
     "packages": [
         "saloonphp/laravel-plugin",
         "spatie/laravel-ray"
     ],
     "sail": false,
     "skills": [
+        "laravel-best-practices",
+        "configuring-horizon",
+        "pulse-development",
         "wayfinder-development",
         "pest-testing",
         "inertia-react-development",
         "tailwindcss-development",
+        "saloon-development",
         "debugging-output-and-previewing-html-using-ray"
     ]
 }
