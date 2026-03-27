@@ -1,4 +1,3 @@
-import { type SharedData } from '@/types';
 import { Form, Head, Link, usePage } from '@inertiajs/react';
 
 import { store as verificationStore } from '@/actions/App/Http/Controllers/Auth/EmailVerificationNotificationController';
@@ -10,6 +9,7 @@ import StatusMessage from '@/components/status-message';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import type {SharedData} from '@/types';
 
 export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: boolean; status?: string }) {
     const { auth, flash } = usePage<SharedData>().props;

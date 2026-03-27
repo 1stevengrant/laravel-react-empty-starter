@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils';
 import { Head } from '@inertiajs/react';
+import { cn } from '@/lib/utils';
 
 interface TestCase {
     category: string;
@@ -61,6 +61,7 @@ function StatusBadge({ passes }: { passes: boolean }) {
 
 function CategoryBadge({ category }: { category: string }) {
     const colors = categoryColors[category] || categoryColors.functional;
+
     return (
         <span
             className={cn(

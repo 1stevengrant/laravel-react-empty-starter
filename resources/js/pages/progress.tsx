@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils';
 import { Head } from '@inertiajs/react';
+import { cn } from '@/lib/utils';
 
 interface ProgressEntry {
     type: 'implemented' | 'fixed' | 'verified';
@@ -64,6 +64,7 @@ const typeConfig: Record<string, { label: string; bg: string; text: string; bord
 
 function TypeBadge({ type }: { type: string }) {
     const config = typeConfig[type] || typeConfig.implemented;
+
     return (
         <span
             className={cn(

@@ -1,14 +1,15 @@
-import InputError from '@/components/input-error';
-import StatusMessage from '@/components/status-message';
-import { type SharedData } from '@/types';
 import { Head, useForm, usePage } from '@inertiajs/react';
-import { FormEventHandler, useRef } from 'react';
+import type { FormEventHandler} from 'react';
+import { useRef } from 'react';
 
 import { update } from '@/actions/App/Http/Controllers/Settings/PasswordController';
 import HeadingSmall from '@/components/heading-small';
+import InputError from '@/components/input-error';
+import StatusMessage from '@/components/status-message';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import type {SharedData} from '@/types';
 
 export default function Password() {
     const passwordInput = useRef<HTMLInputElement>(null);

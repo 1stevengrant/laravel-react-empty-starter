@@ -1,9 +1,9 @@
-import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 
 import { destroy } from '@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController';
 import { edit as profileEdit } from '@/actions/App/Http/Controllers/Settings/ProfileController';
 import { Button } from '@/components/ui/button';
+import type {SharedData} from '@/types';
 
 export default function Dashboard() {
     const { auth } = usePage<SharedData>().props;
