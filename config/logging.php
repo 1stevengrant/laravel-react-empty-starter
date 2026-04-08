@@ -4,6 +4,7 @@ use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 use Monolog\Processor\PsrLogMessageProcessor;
+use Naoray\LaravelGithubMonolog\GithubIssueHandlerFactory;
 
 return [
 
@@ -121,6 +122,15 @@ return [
         'null' => [
             'driver' => 'monolog',
             'handler' => NullHandler::class,
+        ],
+
+        'github' => [
+            'driver' => 'custom',
+            'via' => GithubIssueHandlerFactory::class,
+            'repo' => env('GITHUB_REPO'),
+            'token' => env('GITHUB_TOKEN'),
+            'level' => env('LOG_LEVEL', 'error'),
+            'labels' => ['bug'],
         ],
 
         'emergency' => [
