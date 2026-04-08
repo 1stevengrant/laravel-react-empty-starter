@@ -2,7 +2,7 @@
 
 ## Tech Stack
 
-Laravel 12 + React 19 + Inertia.js + TypeScript + Tailwind CSS 4
+Laravel 13 + React 19 + Inertia.js + TypeScript + Tailwind CSS 4
 
 **Key integrations:**
 - Inertia.js eliminates API layer - controllers return directly to React components
