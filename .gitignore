@@ -24,3 +24,4 @@ yarn-error.log
 /.zed
 .claude/settings.local.json
 /resources/js/actions/Livewire
+/resources/js/types/typescript-transformer-manifest.json
