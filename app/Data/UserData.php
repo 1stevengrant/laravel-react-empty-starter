@@ -18,6 +18,5 @@ class UserData extends Data
         public ?string $email_verified_at,
         public string $created_at,
         public string $updated_at,
-        public array $additional = []
     ) {}
 }

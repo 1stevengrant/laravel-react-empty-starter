@@ -16,6 +16,10 @@ class PrdController extends Controller
             ? json_decode(File::get($prdPath), true)
             : [];
 
+        if (! is_array($testCases)) {
+            $testCases = [];
+        }
+
         $passing = collect($testCases)->where('passes', true)->count();
         $failing = collect($testCases)->where('passes', false)->count();
 
