@@ -1,4 +1,6 @@
 import { createInertiaApp } from '@inertiajs/react';
+import { ThemeProvider } from 'next-themes';
+
 import { TooltipProvider } from '@/components/ui/tooltip';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -10,9 +12,9 @@ createInertiaApp({
     },
     withApp(app) {
         return (
-            <TooltipProvider>
-                {app}
-            </TooltipProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                <TooltipProvider>{app}</TooltipProvider>
+            </ThemeProvider>
         );
     },
 });

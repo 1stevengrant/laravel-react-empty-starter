@@ -1,21 +1,11 @@
 import { Head } from '@inertiajs/react';
+import { Check, X } from 'lucide-react';
+
 import { cn } from '@/lib/utils';
 
-interface TestCase {
-    category: string;
-    description: string;
-    steps: string[];
-    passes: boolean;
-}
-
-interface Props {
-    testCases: TestCase[];
-    summary: {
-        total: number;
-        passing: number;
-        failing: number;
-    };
-}
+type TestCase = App.Data.TestCaseData;
+type PrdSummary = App.Data.PrdSummaryData;
+type Props = App.Data.PrdStatusData;
 
 const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
     functional: {
@@ -45,22 +35,14 @@ function StatusBadge({ passes }: { passes: boolean }) {
                     : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
             )}
         >
-            {passes ? (
-                <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-            ) : (
-                <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            )}
+            {passes ? <Check className="size-4" /> : <X className="size-4" />}
             {passes ? 'Passing' : 'Failing'}
         </span>
     );
 }
 
 function CategoryBadge({ category }: { category: string }) {
-    const colors = categoryColors[category] || categoryColors.functional;
+    const colors = categoryColors[category] ?? categoryColors.functional;
 
     return (
         <span
@@ -103,7 +85,7 @@ function TestCaseCard({ testCase, index }: { testCase: TestCase; index: number }
                     <h4 className="text-sm font-medium text-zinc-500 dark:text-zinc-400">Test Steps</h4>
                     <ol className="space-y-2">
                         {testCase.steps.map((step, stepIndex) => (
-                            <li key={stepIndex} className="flex items-start gap-3">
+                            <li key={step} className="flex items-start gap-3">
                                 <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
                                     {stepIndex + 1}
                                 </span>
@@ -117,7 +99,7 @@ function TestCaseCard({ testCase, index }: { testCase: TestCase; index: number }
     );
 }
 
-function SummaryCard({ summary }: { summary: Props['summary'] }) {
+function SummaryCard({ summary }: { summary: PrdSummary }) {
     const passRate = summary.total > 0 ? Math.round((summary.passing / summary.total) * 100) : 0;
 
     return (
@@ -182,7 +164,7 @@ export default function PrdStatus({ testCases, summary }: Props) {
                         <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">Test Cases</h2>
                         <div className="grid gap-6">
                             {testCases.map((testCase, index) => (
-                                <TestCaseCard key={index} testCase={testCase} index={index} />
+                                <TestCaseCard key={testCase.description} testCase={testCase} index={index} />
                             ))}
                         </div>
                     </div>

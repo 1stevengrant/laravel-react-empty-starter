@@ -1,6 +1,6 @@
 import { useForm } from '@inertiajs/react';
-import type { FormEventHandler} from 'react';
-import { useRef } from 'react';
+import type { FormEventHandler } from 'react';
+import { useRef, useState } from 'react';
 
 import { destroy as destroyProfile } from '@/actions/App/Http/Controllers/Settings/ProfileController';
 import HeadingSmall from '@/components/heading-small';
@@ -10,11 +10,10 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-
-
 export default function DeleteUser() {
+    const [open, setOpen] = useState(false);
     const passwordInput = useRef<HTMLInputElement>(null);
-    const { data, setData, delete: destroy, processing, reset, errors, clearErrors } = useForm<Required<{ password: string }>>({ password: '' });
+    const { data, setData, delete: destroy, processing, reset, errors, clearErrors } = useForm({ password: '' });
 
     const deleteUser: FormEventHandler = (e) => {
         e.preventDefault();
@@ -30,6 +29,7 @@ export default function DeleteUser() {
     const closeModal = () => {
         clearErrors();
         reset();
+        setOpen(false);
     };
 
     return (
@@ -41,7 +41,7 @@ export default function DeleteUser() {
                     <p className="text-sm">Please proceed with caution, this cannot be undone.</p>
                 </div>
 
-                <Dialog>
+                <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
                         <Button variant="destructive">Delete account</Button>
                     </DialogTrigger>

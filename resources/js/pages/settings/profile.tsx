@@ -9,24 +9,20 @@ import StatusMessage from '@/components/status-message';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import type {SharedData} from '@/types';
+import SettingsLayout from '@/layouts/settings-layout';
+import type { SharedData } from '@/types';
 
 export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: boolean; status?: string }) {
     const { auth, flash } = usePage<SharedData>().props;
 
     return (
-        <>
+        <SettingsLayout>
             <Head title="Profile settings" />
 
             <div className="space-y-6">
                 <HeadingSmall title="Profile information" description="Update your name and email address" />
 
-                <Form
-                    action={update.url()}
-                    method="patch"
-                    options={{ preserveScroll: true }}
-                    className="space-y-6"
-                >
+                <Form action={update.url()} method="patch" options={{ preserveScroll: true }} className="space-y-6">
                     {({ errors, processing, recentlySuccessful }) => (
                         <>
                             <div className="grid grid-cols-2 gap-4">
@@ -94,7 +90,11 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                                     </p>
 
                                     <StatusMessage
-                                        message={status === 'verification-link-sent' ? 'A new verification link has been sent to your email address.' : null}
+                                        message={
+                                            status === 'verification-link-sent'
+                                                ? 'A new verification link has been sent to your email address.'
+                                                : null
+                                        }
                                         className="mt-2"
                                     />
                                 </div>
@@ -105,7 +105,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                                     Save
                                 </Button>
 
-                                {recentlySuccessful && <p className="text-sm text-neutral-600 animate-in fade-in">Saved</p>}
+                                {recentlySuccessful && <p className="animate-in text-sm text-neutral-600 fade-in">Saved</p>}
                             </div>
 
                             <StatusMessage message={flash?.success} />
@@ -114,7 +114,9 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                 </Form>
             </div>
 
-            <DeleteUser />
-        </>
+            <div className="mt-10">
+                <DeleteUser />
+            </div>
+        </SettingsLayout>
     );
 }
