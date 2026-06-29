@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Data\ProgressReportData;
 use App\Actions\ParseProgressReport;
 
 class ProgressController extends Controller
@@ -12,6 +13,6 @@ class ProgressController extends Controller
     {
         $report = $parseProgressReport->handle(base_path('plans/progress.txt'));
 
-        return Inertia::render('progress', $report);
+        return Inertia::render('progress', ProgressReportData::from($report));
     }
 }

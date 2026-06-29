@@ -1,69 +1,40 @@
 import { Head } from '@inertiajs/react';
+import type { LucideIcon } from 'lucide-react';
+import { ArrowRight, CircleCheck, Plus, Wrench } from 'lucide-react';
+
 import { cn } from '@/lib/utils';
 
-interface ProgressEntry {
-    type: 'implemented' | 'fixed' | 'verified';
-    prdItems: string[];
-    title: string;
-    changes: string[];
-    nextSteps: string | null;
-}
+type ProgressEntry = App.Data.ProgressEntryData;
+type ProgressSummary = App.Data.ProgressSummaryData;
+type Props = App.Data.ProgressReportData;
 
-interface Props {
-    date: string;
-    entries: ProgressEntry[];
-    summary: {
-        total: number;
-        implemented: number;
-        fixed: number;
-        verified: number;
-    };
-}
-
-const typeConfig: Record<string, { label: string; bg: string; text: string; border: string; icon: React.ReactNode }> = {
+const typeConfig: Record<string, { label: string; bg: string; text: string; border: string; icon: LucideIcon }> = {
     implemented: {
         label: 'Implemented',
         bg: 'bg-green-50 dark:bg-green-950',
         text: 'text-green-700 dark:text-green-300',
         border: 'border-green-200 dark:border-green-800',
-        icon: (
-            <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-        ),
+        icon: Plus,
     },
     fixed: {
         label: 'Fixed',
         bg: 'bg-blue-50 dark:bg-blue-950',
         text: 'text-blue-700 dark:text-blue-300',
         border: 'border-blue-200 dark:border-blue-800',
-        icon: (
-            <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-        ),
+        icon: Wrench,
     },
     verified: {
         label: 'Verified',
         bg: 'bg-purple-50 dark:bg-purple-950',
         text: 'text-purple-700 dark:text-purple-300',
         border: 'border-purple-200 dark:border-purple-800',
-        icon: (
-            <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-        ),
+        icon: CircleCheck,
     },
 };
 
 function TypeBadge({ type }: { type: string }) {
-    const config = typeConfig[type] || typeConfig.implemented;
+    const config = typeConfig[type] ?? typeConfig.implemented;
+    const Icon = config.icon;
 
     return (
         <span
@@ -74,7 +45,7 @@ function TypeBadge({ type }: { type: string }) {
                 config.border,
             )}
         >
-            {config.icon}
+            <Icon className="size-4" />
             {config.label}
         </span>
     );
@@ -89,7 +60,7 @@ function PrdItemBadge({ item }: { item: string }) {
 }
 
 function ProgressEntryCard({ entry, index }: { entry: ProgressEntry; index: number }) {
-    const config = typeConfig[entry.type] || typeConfig.implemented;
+    const config = typeConfig[entry.type] ?? typeConfig.implemented;
 
     return (
         <div className={cn('overflow-hidden rounded-xl border bg-white shadow-sm transition-shadow hover:shadow-md dark:bg-zinc-900', config.border)}>
@@ -112,8 +83,8 @@ function ProgressEntryCard({ entry, index }: { entry: ProgressEntry; index: numb
                     <div className="space-y-2">
                         <h4 className="text-sm font-medium text-zinc-500 dark:text-zinc-400">Changes</h4>
                         <ul className="space-y-2">
-                            {entry.changes.map((change, changeIndex) => (
-                                <li key={changeIndex} className="flex items-start gap-3">
+                            {entry.changes.map((change) => (
+                                <li key={change} className="flex items-start gap-3">
                                     <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-zinc-400 dark:bg-zinc-500" />
                                     <span className="text-sm text-zinc-700 dark:text-zinc-300">{change}</span>
                                 </li>
@@ -125,14 +96,7 @@ function ProgressEntryCard({ entry, index }: { entry: ProgressEntry; index: numb
                 {entry.nextSteps && (
                     <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950">
                         <div className="flex items-start gap-2">
-                            <svg
-                                className="mt-0.5 size-4 shrink-0 text-amber-600 dark:text-amber-400"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
+                            <ArrowRight className="mt-0.5 size-4 shrink-0 text-amber-600 dark:text-amber-400" />
                             <span className="text-sm text-amber-800 dark:text-amber-200">
                                 <span className="font-medium">Next:</span> {entry.nextSteps}
                             </span>
@@ -144,7 +108,9 @@ function ProgressEntryCard({ entry, index }: { entry: ProgressEntry; index: numb
     );
 }
 
-function SummaryCard({ date, summary }: { date: string; summary: Props['summary'] }) {
+function SummaryCard({ date, summary }: { date: string; summary: ProgressSummary }) {
+    const percent = (value: number) => (summary.total > 0 ? (value / summary.total) * 100 : 0);
+
     return (
         <div className="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
             <div className="border-b border-zinc-100 bg-zinc-50 px-6 py-4 dark:border-zinc-800 dark:bg-zinc-800/50">
@@ -177,15 +143,9 @@ function SummaryCard({ date, summary }: { date: string; summary: Props['summary'
                 </div>
 
                 <div className="mt-6 flex gap-2">
-                    <div
-                        className="h-3 rounded-l-full bg-green-500 transition-all"
-                        style={{ width: `${(summary.implemented / summary.total) * 100}%` }}
-                    />
-                    <div className="h-3 bg-blue-500 transition-all" style={{ width: `${(summary.fixed / summary.total) * 100}%` }} />
-                    <div
-                        className="h-3 rounded-r-full bg-purple-500 transition-all"
-                        style={{ width: `${(summary.verified / summary.total) * 100}%` }}
-                    />
+                    <div className="h-3 rounded-l-full bg-green-500 transition-all" style={{ width: `${percent(summary.implemented)}%` }} />
+                    <div className="h-3 bg-blue-500 transition-all" style={{ width: `${percent(summary.fixed)}%` }} />
+                    <div className="h-3 rounded-r-full bg-purple-500 transition-all" style={{ width: `${percent(summary.verified)}%` }} />
                 </div>
                 <div className="mt-2 flex justify-center gap-6 text-xs text-zinc-500 dark:text-zinc-400">
                     <span className="flex items-center gap-1.5">
@@ -223,7 +183,7 @@ export default function Progress({ date, entries, summary }: Props) {
                         <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">Entries ({entries.length})</h2>
                         <div className="grid gap-6">
                             {entries.map((entry, index) => (
-                                <ProgressEntryCard key={index} entry={entry} index={index} />
+                                <ProgressEntryCard key={`${entry.type}:${entry.title}`} entry={entry} index={index} />
                             ))}
                         </div>
                     </div>

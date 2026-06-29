@@ -6,6 +6,7 @@ import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import AuthLayout from '@/layouts/auth-layout';
 
 interface ResetPasswordProps {
     token: string;
@@ -14,7 +15,7 @@ interface ResetPasswordProps {
 
 export default function ResetPassword({ token, email }: ResetPasswordProps) {
     return (
-        <>
+        <AuthLayout title="Reset password" description="Enter and confirm your new password">
             <Head title="Reset password" />
 
             <Form action={store.url()} method="post" resetOnError={['password', 'password_confirmation']}>
@@ -24,16 +25,8 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
 
                         <div className="grid gap-2">
                             <Label htmlFor="email">Email</Label>
-                            <Input
-                                id="email"
-                                type="email"
-                                name="email"
-                                autoComplete="email"
-                                defaultValue={email}
-                                className="mt-1 block w-full"
-                                readOnly
-                            />
-                            <InputError message={errors.email} className="mt-2" />
+                            <Input id="email" type="email" name="email" autoComplete="email" defaultValue={email} className="block w-full" readOnly />
+                            <InputError message={errors.email} />
                         </div>
 
                         <div className="grid gap-2">
@@ -43,7 +36,7 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                                 type="password"
                                 name="password"
                                 autoComplete="new-password"
-                                className="mt-1 block w-full"
+                                className="block w-full"
                                 autoFocus
                                 placeholder="Password"
                             />
@@ -57,19 +50,19 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                                 type="password"
                                 name="password_confirmation"
                                 autoComplete="new-password"
-                                className="mt-1 block w-full"
+                                className="block w-full"
                                 placeholder="Confirm password"
                             />
-                            <InputError message={errors.password_confirmation} className="mt-2" />
+                            <InputError message={errors.password_confirmation} />
                         </div>
 
-                        <Button type="submit" className="mt-4 w-full" disabled={processing}>
+                        <Button type="submit" className="w-full" disabled={processing}>
                             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                             Reset password
                         </Button>
                     </div>
                 )}
             </Form>
-        </>
+        </AuthLayout>
     );
 }
