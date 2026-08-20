@@ -26,5 +26,5 @@ An opinionated Laravel + React + Inertia.js starter kit that won't make you cry.
 - **Laravel Boost** - AI-powered MCP server with database schema access, Artisan commands, error logs, Tinker execution, and semantic documentation search
 - **Saloon** - API integrations that don't make you want to quit programming
 - **Sentry** - Error tracking (spoiler: there will be errors)
-- **PEST 4** - PHP testing with browser testing built-in (goodbye Cypress, hello native Laravel browser testing!)
+- **Pest 5.** PHP testing with browser testing built in (goodbye Cypress, hello native Laravel browser testing!)
 - **Spatie Everything** - Enum, Activity Log, Ray, Laravel Data, TypeScript Transformer (basically the Swiss Army knife of Laravel)

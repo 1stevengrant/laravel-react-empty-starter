@@ -9,7 +9,8 @@
         "format": "prettier --write resources/",
         "format:check": "prettier --check resources/",
         "lint": "eslint . --fix",
-        "types": "tsc --noEmit"
+        "types": "pnpm wayfinder && tsc --noEmit",
+        "wayfinder": "php artisan wayfinder:generate --with-form --no-interaction"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
@@ -55,7 +56,7 @@
         "laravel-vite-plugin": "^3.1.0",
         "lucide-react": "^1.14.0",
         "next-themes": "^0.4.6",
-        "playwright": "^1.59.1",
+        "playwright": "^1.62.1",
         "radix-ui": "^1.4.3",
         "react": "^19.2.6",
         "react-day-picker": "^10.0.0",
@@ -83,9 +84,20 @@
             "picomatch@<3.0.0": ">=2.3.2",
             "picomatch@>=4.0.0": ">=4.0.4",
             "qs@>=6.11.1 <=6.15.1": ">=6.15.2",
-            "hono": ">=4.12.25",
+            "hono": ">=4.12.34",
             "@babel/core": ">=7.29.6",
-            "js-yaml@<=4.1.1": ">=4.2.0"
+            "js-yaml@<=4.1.1": ">=4.2.0",
+            "brace-expansion@<1.1.18": ">=1.1.18",
+            "brace-expansion@>=3.0.0 <5.0.9": ">=5.0.9",
+            "cosmiconfig>js-yaml": "5.2.2",
+            "shell-quote@<=1.8.4": ">=1.9.0",
+            "body-parser@>=2.0.0 <2.3.0": ">=2.3.0",
+            "fast-uri@>=3.0.0 <3.1.5": ">=3.1.5",
+            "postcss@<=8.5.22": ">=8.5.23",
+            "undici@>=7.0.0 <7.29.0": ">=7.29.0",
+            "ip-address@<=10.3.0": ">=10.3.1",
+            "@hono/node-server@<1.19.15": ">=1.19.15",
+            "nanoid@<3.3.18": ">=3.3.18"
         }
     }
 }
