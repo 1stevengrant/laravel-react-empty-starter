@@ -16,7 +16,7 @@ metadata:
 
 Ray is Spatie's desktop debugging application for developers. Send data directly to Ray by making HTTP requests to its local server.
 
-This can be useful for debugging applications, or to preview design, logos, or other visual content. 
+This can be useful for debugging applications, or to preview design, logos, or other visual content.
 
 This is what the `ray()` PHP function does under the hood.
 

@@ -1,13 +1,16 @@
 {
     "agents": [
-        "claude_code"
+        "claude_code",
+        "codex"
     ],
+    "cloud": true,
     "guidelines": true,
     "mcp": true,
-    "nightwatch_mcp": false,
+    "nightwatch": false,
     "packages": [
         "saloonphp/laravel-plugin",
-        "spatie/laravel-ray"
+        "spatie/laravel-ray",
+        "spatie/laravel-activitylog"
     ],
     "sail": false,
     "skills": [
@@ -19,6 +22,7 @@
         "inertia-react-development",
         "tailwindcss-development",
         "saloon-development",
-        "debugging-output-and-previewing-html-using-ray"
+        "debugging-output-and-previewing-html-using-ray",
+        "deploying-laravel-cloud"
     ]
 }
