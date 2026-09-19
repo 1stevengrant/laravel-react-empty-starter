@@ -14,9 +14,11 @@
     ],
     "sail": false,
     "skills": [
+        "infer-conventions",
+        "deploying-to-cloud",
         "laravel-best-practices",
+        "testing-best-practices",
         "wayfinder-development",
-        "pest-testing",
         "inertia-react-development",
         "tailwindcss-development",
         "saloon-development",
