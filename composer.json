@@ -9,8 +9,6 @@
         "php": "^8.4",
         "inertiajs/inertia-laravel": "^3.0",
         "laravel/framework": "^13.0",
-        "laravel/horizon": "^5.33",
-        "laravel/pulse": "^1.4",
         "laravel/tinker": "^3.0",
         "laravel/wayfinder": "^0.1.12",
         "league/flysystem-aws-s3-v3": "^3.0",

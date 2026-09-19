@@ -21,8 +21,6 @@ So be it, until the product is shipped and there are no bugs, but profit!
 An opinionated Laravel + React + Inertia.js starter kit that won't make you cry.
 
 ### Battle-Tested Arsenal
-- **Laravel Horizon** - Because watching queues is oddly therapeutic
-- **Laravel Pulse** - Performance monitoring for when things inevitably break
 - **Laravel Boost** - AI-powered MCP server with database schema access, Artisan commands, error logs, Tinker execution, and semantic documentation search
 - **Saloon** - API integrations that don't make you want to quit programming
 - **Sentry** - Error tracking (spoiler: there will be errors)

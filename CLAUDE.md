@@ -86,8 +86,6 @@ React receives ready-to-render data. Period.
 | Task | Command/Location |
 |------|------------------|
 | Transform DTOs to TS | `php artisan typescript:transform` |
-| Queue monitoring | `/horizon` |
-| Performance monitoring | `/pulse` |
 | Format PHP | `vendor/bin/pint --dirty` |
 
 ===
@@ -106,11 +104,8 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - php - 8.4
 - inertiajs/inertia-laravel (INERTIA_LARAVEL) - v3
 - laravel/framework (LARAVEL) - v13
-- laravel/horizon (HORIZON) - v5
 - laravel/prompts (PROMPTS) - v0
-- laravel/pulse (PULSE) - v1
 - laravel/wayfinder (WAYFINDER) - v0
-- livewire/livewire (LIVEWIRE) - v4
 - larastan/larastan (LARASTAN) - v3
 - laravel/boost (BOOST) - v2
 - laravel/mcp (MCP) - v0
