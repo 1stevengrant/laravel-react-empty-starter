@@ -3,8 +3,9 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 test('reset password link screen can be rendered', function (): void {
     $response = $this->get('/forgot-password');

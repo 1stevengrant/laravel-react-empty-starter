@@ -3,11 +3,11 @@
 
 @import 'tw-animate-css';
 
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
-@import "shadcn/tailwind.css";
+@import 'shadcn/tailwind.css';
 
-@import "@fontsource-variable/jetbrains-mono";
+@import '@fontsource-variable/jetbrains-mono';
 
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -132,13 +132,13 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+    * {
+        @apply border-border outline-ring/50;
     }
-  body {
-    @apply bg-background text-foreground;
+    body {
+        @apply bg-background text-foreground;
     }
-  html {
-    @apply font-mono;
+    html {
+        @apply font-mono;
     }
 }
