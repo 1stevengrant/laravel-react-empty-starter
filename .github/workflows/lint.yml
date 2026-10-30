@@ -43,6 +43,9 @@ jobs:
           cp .env.example .env
           php artisan key:generate
 
+      - name: Generate Wayfinder Routes
+        run: pnpm run wayfinder
+
       - name: Check PHP Style
         run: vendor/bin/pint --test
 
