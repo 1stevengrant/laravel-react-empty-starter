@@ -12,14 +12,13 @@
         "laravel/tinker": "^3.0",
         "laravel/wayfinder": "^0.1.12",
         "league/flysystem-aws-s3-v3": "^3.0",
-        "naoray/laravel-github-monolog": "dev-main",
+        "naoray/laravel-github-monolog": "^3.11",
         "saloonphp/laravel-plugin": "^4.0",
         "saloonphp/saloon": "^4.0",
         "sentry/sentry-laravel": "^4.15",
         "spatie/enum": "^3.13",
         "spatie/laravel-activitylog": "^5.0",
         "spatie/laravel-data": "^4.15",
-        "spatie/laravel-ray": "^1.40",
         "spatie/laravel-typescript-transformer": "^3.2",
         "symfony/http-client": "^8.0",
         "symfony/postmark-mailer": "^8.0"
@@ -37,7 +36,8 @@
         "pestphp/pest": "^5.0",
         "pestphp/pest-plugin-browser": "^5.0",
         "pestphp/pest-plugin-laravel": "^5.0",
-        "rector/rector": "^2.3"
+        "rector/rector": "^2.3",
+        "spatie/laravel-ray": "^1.40"
     },
     "autoload": {
         "psr-4": {
@@ -72,9 +72,9 @@
             "@php artisan dev"
         ],
         "dev:ssr": [
-            "npm run build:ssr",
+            "pnpm run build:ssr",
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#c4b5fd,#fb7185,#fdba74\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"php artisan inertia:start-ssr\" --names=queue,logs,ssr --kill-others"
+            "pnpm dlx concurrently -c \"#c4b5fd,#fb7185,#fdba74\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"php artisan inertia:start-ssr\" --names=queue,logs,ssr --kill-others"
         ],
         "test": [
             "@php artisan config:clear --ansi",

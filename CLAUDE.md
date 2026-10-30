@@ -14,10 +14,10 @@ Laravel 13 + React 19 + Inertia.js + TypeScript + Tailwind CSS 4
 ```bash
 # Development
 composer dev                 # Full dev environment via `php artisan dev` (queue, logs, Vite; Flock serves the site)
-npm run dev                  # Vite only
+pnpm dev                     # Vite only
 
 # Quality
-npm run lint && npm run format && npm run types   # CI runs lint:check, format:check, types, pint --test and composer analyse
+pnpm lint && pnpm format && pnpm types   # CI runs lint:check, format:check, types, pint --test and composer analyse
 
 # Testing
 composer test                # Pest PHP tests
@@ -78,7 +78,7 @@ React receives ready-to-render data. Period.
 
 ## Testing
 
-- Browser tests: `tests/Feature/Browser/` (requires `php artisan serve` running)
+- Browser tests: `tests/Feature/Browser/` (Pest starts its own server; no `php artisan serve` needed)
 - Use Pest 4 with `search-docs` for browser testing patterns
 
 ## Quick Reference
