@@ -26,6 +26,5 @@ export interface SharedData {
     theme: 'default' | 'brutalist' | 'glass' | 'ink' | 'terminal' | 'retro';
     quote: { message: string; author: string };
     auth: Auth;
-    sidebarOpen: boolean;
     [key: string]: unknown;
 }

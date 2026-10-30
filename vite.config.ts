@@ -51,4 +51,9 @@ export default defineConfig({
             },
         ]),
     ],
+    server: {
+        watch: {
+            ignored: ['**/.agents/**', '**/.claude/**', '**/vendor/**'],
+        },
+    },
 });
