@@ -9,6 +9,7 @@
         "format": "prettier --write resources/",
         "format:check": "prettier --check resources/",
         "lint": "eslint . --fix",
+        "lint:check": "eslint .",
         "types": "pnpm wayfinder && tsc --noEmit",
         "wayfinder": "php artisan wayfinder:generate --with-form --no-interaction"
     },

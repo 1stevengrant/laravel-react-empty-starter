@@ -17,7 +17,7 @@ composer dev                 # Full dev environment via `php artisan dev` (queue
 npm run dev                  # Vite only
 
 # Quality
-npm run lint && npm run format && npm run types
+npm run lint && npm run format && npm run types   # CI runs lint:check, format:check, types, pint --test and composer analyse
 
 # Testing
 composer test                # Pest PHP tests
