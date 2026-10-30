@@ -20,7 +20,9 @@ test('password can be updated', function (): void {
 
     $response
         ->assertSessionHasNoErrors()
-        ->assertRedirect('/settings/password');
+        ->assertRedirect('/settings/password')
+        ->assertInertiaFlash('toast.type', 'success')
+        ->assertInertiaFlash('toast.message', 'Password updated.');
 
     expect(Hash::check('new-password', $user->refresh()->password))->toBeTrue();
 });

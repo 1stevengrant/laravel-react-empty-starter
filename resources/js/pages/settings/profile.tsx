@@ -13,7 +13,7 @@ import SettingsLayout from '@/layouts/settings-layout';
 import type { SharedData } from '@/types';
 
 export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: boolean; status?: string }) {
-    const { auth, flash } = usePage<SharedData>().props;
+    const { auth } = usePage<SharedData>().props;
 
     return (
         <SettingsLayout>
@@ -107,8 +107,6 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
 
                                 {recentlySuccessful && <p className="animate-in text-sm text-neutral-600 fade-in">Saved</p>}
                             </div>
-
-                            <StatusMessage message={flash?.success} />
                         </>
                     )}
                 </Form>

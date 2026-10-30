@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Settings;
 
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Data\ToastData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +38,9 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return to_route('profile.edit')->with('success', 'Profile updated successfully');
+        Inertia::flash('toast', ToastData::success(__('Profile updated.'))->toArray());
+
+        return to_route('profile.edit');
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Settings;
 
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Data\ToastData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -34,6 +35,8 @@ class PasswordController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return back()->with('success', 'Password updated successfully');
+        Inertia::flash('toast', ToastData::success(__('Password updated.'))->toArray());
+
+        return back();
     }
 }

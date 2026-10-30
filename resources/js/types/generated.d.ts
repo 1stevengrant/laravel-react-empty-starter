@@ -33,6 +33,10 @@ declare namespace App {
             steps: string[];
             passes: boolean;
         };
+        export type ToastData = {
+            type: App.Enums.ToastType;
+            message: string;
+        };
         export type UserData = {
             id: number;
             first_name: string;
@@ -44,5 +48,8 @@ declare namespace App {
             created_at: string;
             updated_at: string;
         };
+    }
+    namespace Enums {
+        export type ToastType = 'success' | 'error' | 'warning' | 'info';
     }
 }

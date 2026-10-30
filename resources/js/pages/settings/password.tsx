@@ -1,22 +1,19 @@
-import { Head, useForm, usePage } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 import type { FormEventHandler } from 'react';
 import { useRef } from 'react';
 
 import { update } from '@/actions/App/Http/Controllers/Settings/PasswordController';
 import HeadingSmall from '@/components/heading-small';
 import InputError from '@/components/input-error';
-import StatusMessage from '@/components/status-message';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import SettingsLayout from '@/layouts/settings-layout';
-import type { SharedData } from '@/types';
 
 export default function Password() {
     const passwordInput = useRef<HTMLInputElement>(null);
     const currentPasswordInput = useRef<HTMLInputElement>(null);
 
-    const { flash } = usePage<SharedData>().props;
     const { data, setData, errors, put, reset, processing, recentlySuccessful } = useForm({
         current_password: '',
         password: '',
@@ -111,8 +108,6 @@ export default function Password() {
 
                         {recentlySuccessful && <p className="animate-in text-sm text-neutral-600 fade-in">Saved</p>}
                     </div>
-
-                    <StatusMessage message={flash?.success} />
                 </form>
             </div>
         </SettingsLayout>

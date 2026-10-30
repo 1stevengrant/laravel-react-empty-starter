@@ -18,7 +18,7 @@ describe('Settings', function (): void {
             ->type('[name="last_name"]', 'Updated Last Name')
             ->type('[name="email"]', 'updated@example.com')
             ->click('button[type="submit"]')
-            ->assertSee('Profile updated successfully');
+            ->assertSee('Profile updated.');
     });
 
     it('allows users to change their password', function (): void {
@@ -33,6 +33,6 @@ describe('Settings', function (): void {
             ->type('[name="new_password"]', 'newpassword123')
             ->type('[name="new_password_confirmation"]', 'newpassword123')
             ->click('button[type="submit"]')
-            ->assertSee('Password updated successfully');
+            ->assertSee('Password updated.');
     });
 });
