@@ -13,7 +13,7 @@ Laravel 13 + React 19 + Inertia.js + TypeScript + Tailwind CSS 4
 
 ```bash
 # Development
-composer dev                 # Full dev environment (queue, logs, Vite)
+composer dev                 # Full dev environment via `php artisan dev` (queue, logs, Vite; Flock serves the site)
 npm run dev                  # Vite only
 
 # Quality

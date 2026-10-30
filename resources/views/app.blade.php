@@ -1,9 +1,21 @@
 @php $theme = config('app.theme', 'default'); @endphp
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" @class(['dark' => ($appearance ?? 'system') == 'dark']) data-theme="{{ $theme }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="{{ $theme }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {{-- Apply the stored next-themes preference before first paint to avoid a light flash --}}
+        <script>
+            (function () {
+                try {
+                    const theme = localStorage.getItem('theme') ?? 'system';
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                    document.documentElement.classList.toggle('dark', theme === 'dark' || (theme === 'system' && prefersDark));
+                } catch (e) {}
+            })();
+        </script>
 
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
