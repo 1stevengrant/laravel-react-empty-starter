@@ -13,7 +13,7 @@
         "laravel/wayfinder": "^0.1.12",
         "league/flysystem-aws-s3-v3": "^3.0",
         "naoray/laravel-github-monolog": "^3.11",
-        "saloonphp/laravel-plugin": "^4.0",
+        "saloonphp/laravel-plugin": "^5.0",
         "saloonphp/saloon": "^4.0",
         "sentry/sentry-laravel": "^4.15",
         "spatie/enum": "^3.13",
